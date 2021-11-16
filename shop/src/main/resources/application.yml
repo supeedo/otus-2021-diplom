@@ -1,6 +1,17 @@
 
 
 
+
+
+
+
+
+
+
+springdoc:
+  api-docs:
+    path: "/api-docs"
+
 logging:
   level:
     ru.quizapp: WARN
