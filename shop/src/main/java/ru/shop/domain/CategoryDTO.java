@@ -1,4 +1,64 @@
 package ru.shop.domain;
 
+import java.util.Objects;
+
 public class CategoryDTO {
+    private Long id;
+    private String categoryName;
+    private String description;
+
+    public CategoryDTO() {
+    }
+
+    public CategoryDTO(Long id, String categoryName, String description) {
+        this.id = id;
+        this.categoryName = categoryName;
+        this.description = description;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CategoryDTO that = (CategoryDTO) o;
+        return Objects.equals(id, that.id) && Objects.equals(categoryName, that.categoryName) && Objects.equals(description, that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, categoryName, description);
+    }
+
+    @Override
+    public String toString() {
+        return "CategoryDTO{" +
+                "id=" + id +
+                ", categoryName='" + categoryName + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

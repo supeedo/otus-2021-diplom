@@ -28,7 +28,7 @@ public class CategoryController {
                     content = {
                             @Content(
                                     mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = CategoryDTO.class)))
+                                    schema = @Schema(implementation = CategoryDTO.class ))
                     }),
             @ApiResponse(
                     responseCode = "500", description = "Server error"
