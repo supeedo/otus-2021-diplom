@@ -4,31 +4,32 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/order")
 @RestControllerAdvice
 @Tag(name = "Заказы", description = "методы контроллера Заказов товара")
 public class OrderController {
 
-    @GetMapping("/order/")
+    @GetMapping("/")
     public String getAllOrder() {
         return "Hello";
     }
 
-    @GetMapping("/order/{id}")
+    @GetMapping("/{id}")
     public String getOrderById(@PathVariable String id) {
         return id;
     }
 
-    @PutMapping("/order/")
+    @PutMapping("/")
     public String addOrder(){
         return null;
     }
 
-    @PostMapping("/order/{id}")
+    @PostMapping("/{id}")
     public String updateOrderById(@PathVariable String id, @RequestBody String orderDTO){
         return null;
     }
 
-    @DeleteMapping("/order/{id}")
+    @DeleteMapping("/{id}")
     public String deleteOrderById(@PathVariable String id){
         return null;
     }
