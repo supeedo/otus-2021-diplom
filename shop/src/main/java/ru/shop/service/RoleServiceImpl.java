@@ -62,7 +62,7 @@ public class RoleServiceImpl implements RoleService {
         final var role = RoleMapper.INSTANCE.roleDtoToRole(roleDto);
         roleRepository.save(role);
     }
-
+    //TODO доделать проверку на null
     @Transactional
     @Override
     public void updateRole(RoleDTO roleDto) {

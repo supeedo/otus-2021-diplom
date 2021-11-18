@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class ProductDTO {
     private Long id;
-    private String category;
+    private CategoryDTO category;
     private String name;
     private String description;
     private Double price;
@@ -14,7 +14,7 @@ public class ProductDTO {
     public ProductDTO() {
     }
 
-    public ProductDTO(Long id, String category, String name, String description, Double price, boolean active) {
+    public ProductDTO(Long id, CategoryDTO category, String name, String description, Double price, boolean active) {
         this.id = id;
         this.category = category;
         this.name = name;
@@ -31,11 +31,11 @@ public class ProductDTO {
         this.id = id;
     }
 
-    public String getCategory() {
+    public CategoryDTO getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(CategoryDTO category) {
         this.category = category;
     }
 

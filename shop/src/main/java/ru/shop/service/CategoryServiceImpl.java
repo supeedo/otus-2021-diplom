@@ -72,7 +72,7 @@ public class CategoryServiceImpl implements CategoryService {
         final var category = CategoryMapper.INSTANCE.categoryDtoToCategory(categoryDto);
         categoryRepository.save(category);
     }
-
+    //TODO доделать проверку на null
     @Transactional
     @Override
     public void updateCategory(final CategoryDTO categoryDto) {
