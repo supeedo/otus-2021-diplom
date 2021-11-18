@@ -6,4 +6,6 @@ import ru.shop.domain.Category;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
+
+    Category findCategoryByCategoryName(String categoryName);
 }
