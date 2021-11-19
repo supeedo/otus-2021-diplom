@@ -63,7 +63,7 @@ public class AddressServiceImpl implements AddressService {
         final var address = AddressMapper.INSTANCE.addressDtoToAddress(addressDto);
         addressRepository.save(address);
     }
-    //TODO доделать проверку на null
+
     @Transactional
     @Override
     public void updateAddress(AddressDTO addressDto) {
