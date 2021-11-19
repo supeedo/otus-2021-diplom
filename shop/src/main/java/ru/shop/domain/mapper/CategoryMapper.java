@@ -1,16 +1,13 @@
 package ru.shop.domain.mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 import ru.shop.domain.Category;
 import ru.shop.domain.CategoryDTO;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CategoryMapper {
 
-    CategoryMapper INSTANCE = Mappers.getMapper(CategoryMapper.class);
+   CategoryDTO categoryToCategoryDto(Category entity);
 
-    CategoryDTO categoryToCategoryDto(Category entity);
-
-    Category categoryDtoToCategory(CategoryDTO dto);
+   Category categoryDtoToCategory(CategoryDTO dto);
 }

@@ -78,12 +78,12 @@ public class ProductServiceImpl implements ProductService {
         product.setPrice(productDto.getPrice());
         product.setActive(productDto.isActive());
         categoryService.updateCategory(productDto.getCategory());
-        product.setCategory(
-                CategoryMapper.INSTANCE.categoryDtoToCategory(
-                        categoryService.getCategoryById(
-                                productDto.getCategory().getId()
-                        )
-                )
-        );
+//        product.setCategory(
+////                CategoryMapper.INSTANCE.categoryDtoToCategory(
+////                        categoryService.getCategoryById(
+////                                productDto.getCategory().getId()
+////                        )
+////                )
+//        );
     }
 }

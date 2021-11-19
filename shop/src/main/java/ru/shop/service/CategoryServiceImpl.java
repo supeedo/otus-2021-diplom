@@ -1,5 +1,6 @@
 package ru.shop.service;
 
+import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class CategoryServiceImpl implements CategoryService {
     private static final Logger LOGGER = LoggerFactory.getLogger(CategoryServiceImpl.class.getName());
 
     private final CategoryRepository categoryRepository;
+    private final CategoryMapper categoryMapper = Mappers.getMapper(CategoryMapper.class);
 
     public CategoryServiceImpl(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
@@ -34,7 +36,7 @@ public class CategoryServiceImpl implements CategoryService {
     public List<CategoryDTO> getAllCategory() {
         final var categories = categoryRepository.findAll();
         return categories.stream()
-                .map(CategoryMapper.INSTANCE::categoryToCategoryDto)
+                .map(categoryMapper::categoryToCategoryDto)
                 .collect(Collectors.toList());
     }
 
@@ -46,7 +48,7 @@ public class CategoryServiceImpl implements CategoryService {
                 .findById(categoryId)
                 .orElseThrow(() -> new EntityNotFoundException("Category not found"));
         LOGGER.debug("Found category by id = {}", category);
-        return CategoryMapper.INSTANCE.categoryToCategoryDto(category);
+        return categoryMapper.categoryToCategoryDto(category);
     }
 
     @Transactional(readOnly = true)
@@ -55,7 +57,7 @@ public class CategoryServiceImpl implements CategoryService {
         LOGGER.debug("Find category by name = {}", categoryName);
         final var category = categoryRepository.findCategoryByCategoryName(categoryName);
         LOGGER.debug("Found category by name = {}", category);
-        return CategoryMapper.INSTANCE.categoryToCategoryDto(category);
+        return categoryMapper.categoryToCategoryDto(category);
     }
 
     @Transactional
@@ -69,10 +71,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void createNewCategory(final CategoryDTO categoryDto) {
         LOGGER.debug("Create category by dto = {}", categoryDto);
-        final var category = CategoryMapper.INSTANCE.categoryDtoToCategory(categoryDto);
+        final var category = categoryMapper.categoryDtoToCategory(categoryDto);
         categoryRepository.save(category);
     }
-    //TODO доделать проверку на null
+
     @Transactional
     @Override
     public void updateCategory(final CategoryDTO categoryDto) {
