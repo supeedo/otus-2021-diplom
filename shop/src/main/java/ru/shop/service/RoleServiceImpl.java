@@ -1,5 +1,6 @@
 package ru.shop.service;
 
+import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ public class RoleServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;
 
+   private final RoleMapper roleMapper = Mappers.getMapper(RoleMapper.class);
+
     public RoleServiceImpl(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
@@ -33,7 +36,7 @@ public class RoleServiceImpl implements RoleService {
     public List<RoleDTO> getAllRole() {
         final var roles = roleRepository.findAll();
         return roles.stream()
-                .map(RoleMapper.INSTANCE::roleToRoleDto)
+                .map(roleMapper::roleToRoleDto)
                 .collect(Collectors.toList());
     }
 
@@ -45,7 +48,7 @@ public class RoleServiceImpl implements RoleService {
                 .findById(roleId)
                 .orElseThrow(() -> new EntityNotFoundException("Role not found"));
         LOGGER.debug("Found role by id = {}", role);
-        return RoleMapper.INSTANCE.roleToRoleDto(role);
+        return roleMapper.roleToRoleDto(role);
     }
 
     @Transactional
@@ -59,10 +62,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void createNewRole(RoleDTO roleDto) {
         LOGGER.debug("Create role by dto = {}", roleDto);
-        final var role = RoleMapper.INSTANCE.roleDtoToRole(roleDto);
+        final var role = roleMapper.roleDtoToRole(roleDto);
         roleRepository.save(role);
     }
-    //TODO доделать проверку на null
+
     @Transactional
     @Override
     public void updateRole(RoleDTO roleDto) {

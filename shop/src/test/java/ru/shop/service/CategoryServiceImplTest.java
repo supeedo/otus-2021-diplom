@@ -33,6 +33,7 @@ class CategoryServiceImplTest {
     void getCountServices() {
         final Long actualCountCategory = service.getCountServices();
         assertThat(actualCountCategory)
+                .isNotNull()
                 .isEqualTo(COUNT_TEST_CATEGORY)
                 .isNotEqualTo(BAD_COUNT_TEST_CATEGORY);
     }
