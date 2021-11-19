@@ -18,14 +18,14 @@ public class Address {
     @Column(name = "house_number", nullable = false)
     private String houseNumber;
     @Column(name = "floor", nullable = false)
-    private Long floor;
+    private Integer floor;
     @Column(name = "apartment_number")
     private String apartmentNumber;
 
     public Address() {
     }
 
-    public Address(Long id, String city, String street, String houseNumber, Long floor, String apartmentNumber) {
+    public Address(Long id, String city, String street, String houseNumber, Integer floor, String apartmentNumber) {
         this.id = id;
         this.city = city;
         this.street = street;
@@ -66,11 +66,11 @@ public class Address {
         this.houseNumber = houseNumber;
     }
 
-    public Long getFloor() {
+    public Integer getFloor() {
         return floor;
     }
 
-    public void setFloor(Long floor) {
+    public void setFloor(Integer floor) {
         this.floor = floor;
     }
 

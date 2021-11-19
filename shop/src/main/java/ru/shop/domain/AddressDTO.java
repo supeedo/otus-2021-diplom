@@ -7,13 +7,13 @@ public class AddressDTO {
     private String city;
     private String street;
     private String houseNumber;
-    private Long floor;
+    private Integer floor;
     private String apartmentNumber;
 
     public AddressDTO() {
     }
 
-    public AddressDTO(Long id, String city, String street, String houseNumber, Long floor, String apartmentNumber) {
+    public AddressDTO(Long id, String city, String street, String houseNumber, Integer floor, String apartmentNumber) {
         this.id = id;
         this.city = city;
         this.street = street;
@@ -54,11 +54,11 @@ public class AddressDTO {
         this.houseNumber = houseNumber;
     }
 
-    public Long getFloor() {
+    public Integer getFloor() {
         return floor;
     }
 
-    public void setFloor(Long floor) {
+    public void setFloor(Integer floor) {
         this.floor = floor;
     }
 
