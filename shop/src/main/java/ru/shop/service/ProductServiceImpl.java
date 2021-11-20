@@ -69,7 +69,6 @@ public class ProductServiceImpl implements ProductService {
         productRepository.save(product);
     }
 
-    //TODO доделать проверку на null
     @Transactional
     @Override
     public void updateProduct(ProductDTO productDto) {
