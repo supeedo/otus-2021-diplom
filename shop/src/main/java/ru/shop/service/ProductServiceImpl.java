@@ -1,5 +1,6 @@
 package ru.shop.service;
 
+import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,8 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final CategoryService categoryService;
+    private final ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
+    private final CategoryMapper categoryMapper = Mappers.getMapper(CategoryMapper.class);
 
     public ProductServiceImpl(ProductRepository productRepository, CategoryService categoryService) {
         this.productRepository = productRepository;
@@ -36,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductDTO> getAllProduct() {
         final var products = productRepository.findAll();
         return products.stream()
-                .map(ProductMapper.INSTANCE::productToProductDto)
+                .map(productMapper::productToProductDto)
                 .collect(Collectors.toList());
     }
 
@@ -48,7 +51,7 @@ public class ProductServiceImpl implements ProductService {
                 .findById(productId)
                 .orElseThrow(() -> new EntityNotFoundException("Product not found"));
         LOGGER.debug("Found product by id = {}", product);
-        return ProductMapper.INSTANCE.productToProductDto(product);
+        return productMapper.productToProductDto(product);
     }
 
     @Transactional
@@ -62,9 +65,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void createNewProduct(ProductDTO productDto) {
         LOGGER.debug("Create product by dto = {}", productDto);
-        final var product = ProductMapper.INSTANCE.productDtoToProduct(productDto);
+        final var product = productMapper.productDtoToProduct(productDto);
         productRepository.save(product);
     }
+
     //TODO доделать проверку на null
     @Transactional
     @Override
@@ -78,12 +82,12 @@ public class ProductServiceImpl implements ProductService {
         product.setPrice(productDto.getPrice());
         product.setActive(productDto.isActive());
         categoryService.updateCategory(productDto.getCategory());
-//        product.setCategory(
-////                CategoryMapper.INSTANCE.categoryDtoToCategory(
-////                        categoryService.getCategoryById(
-////                                productDto.getCategory().getId()
-////                        )
-////                )
-//        );
+        product.setCategory(
+                categoryMapper.categoryDtoToCategory(
+                        categoryService.getCategoryById(
+                                productDto.getCategory().getId()
+                        )
+                )
+        );
     }
 }

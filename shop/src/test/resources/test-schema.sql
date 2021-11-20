@@ -11,14 +11,14 @@ CREATE TABLE address
     city             VARCHAR(50)        NOT NULL,
     street           VARCHAR(50)        NOT NULL,
     house_number     VARCHAR(50)        NOT NULL,
-    floor            SMALLINT           NOT NULL,
-    apartment_number VARCHAR(50)        NOT NULL
+    floor            SMALLINT,
+    apartment_number VARCHAR(50)
 );
 CREATE TABLE categories
 (
     id          SERIAL PRIMARY KEY NOT NULL,
     category    VARCHAR(50)        NOT NULL,
-    description VARCHAR(255)       NOT NULL
+    description VARCHAR(255)
 );
 -- CREATE TABLE product
 -- (
@@ -45,3 +45,12 @@ CREATE TABLE roles
 --     comment VARCHAR(555)                      NOT NULL
 --
 -- );
+CREATE TABLE product
+(
+    ID          SERIAL PRIMARY KEY NOT NULL,
+    category_id BIGINT             NOT NULL,
+    name        VARCHAR(100)       NOT NULL,
+    description VARCHAR(2048),
+    price       DOUBLE PRECISION   NOT NULL,
+    active      BOOLEAN            NOT NULL
+);
