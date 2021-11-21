@@ -1,19 +1,19 @@
 package ru.shop.service;
 
-import ru.shop.domain.AddressDTO;
+import ru.shop.domain.UserAddressDTO;
 
 import java.util.List;
 
 public interface AddressService {
     Long getCountAddress();
 
-    List<AddressDTO> getAllAddress();
+    List<UserAddressDTO> getAllAddress();
 
-    AddressDTO getAddressById(Long categoryId);
+    UserAddressDTO getAddressById(Long categoryId);
 
     void deleteAddressById(Long categoryId);
 
-    void createNewAddress(AddressDTO categoryDto);
+    void createNewAddress(UserAddressDTO categoryDto);
 
-    void updateAddress(AddressDTO categoryDto);
+    void updateAddress(UserAddressDTO categoryDto);
 }

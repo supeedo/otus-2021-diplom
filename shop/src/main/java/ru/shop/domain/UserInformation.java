@@ -18,9 +18,9 @@ public class UserInformation {
     private String patronymic;
     @Column(name = "phone")
     private String phone;
-    @ManyToOne(targetEntity = Address.class, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(targetEntity = UserAddress.class, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_address_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_address_id"))
-    private Address address;
+    private UserAddress address;
 
     public UserInformation() {
     }
@@ -73,11 +73,11 @@ public class UserInformation {
         this.phone = phone;
     }
 
-    public Address getAddress() {
+    public UserAddress getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(UserAddress address) {
         this.address = address;
     }
 

@@ -20,11 +20,7 @@ CREATE TABLE categories
     category    VARCHAR(50)        NOT NULL,
     description VARCHAR(255)
 );
--- CREATE TABLE product
--- (
---     ID         BIGINT AUTO_INCREMENT PRIMARY KEY NOT NULL,
---     GENRE_NAME VARCHAR(255)                      NOT NULL
--- );
+
 CREATE TABLE roles
 (
     id   SERIAL PRIMARY KEY NOT NULL,
@@ -53,4 +49,22 @@ CREATE TABLE product
     description VARCHAR(2048),
     price       DOUBLE PRECISION   NOT NULL,
     active      BOOLEAN            NOT NULL
+);
+
+CREATE TABLE orders
+(
+    id            SERIAL PRIMARY KEY NOT NULL,
+    create_time   DATE               NOT NULL,
+    delivery_time DATE               NOT NULL,
+    user_id       BIGINT             NOT NULL,
+    note          VARCHAR(2048),
+    status        VARCHAR(100)       NOT NULL
+);
+
+CREATE TABLE product_orders
+(
+    id            SERIAL PRIMARY KEY             NOT NULL,
+    order_id      BIGINT references orders (id)  NOT NULL,
+    product_id    BIGINT references product (id) NOT NULL,
+    product_count BIGINT                         NOT NULL
 );

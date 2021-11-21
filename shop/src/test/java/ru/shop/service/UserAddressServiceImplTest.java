@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
-import ru.shop.domain.AddressDTO;
-import ru.shop.domain.RoleDTO;
+import ru.shop.domain.UserAddressDTO;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -15,22 +14,22 @@ import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 @SpringBootTest
 @DisplayName("Address service tests")
-class AddressServiceImplTest {
+class UserAddressServiceImplTest {
 
     private final AddressService service;
 
     private static final Long COUNT_TEST_ADDRESS = 2L;
     private static final Long BAD_COUNT_TEST_ADDRESS = 3L;
-    private static final AddressDTO FIRST_TEST_ADDRESS =
-            new AddressDTO(1L, "Moscow", "Sudostroitelnaya street", "12/1", 5, "112");
-    private static final AddressDTO SECOND_TEST_ADDRESS =
-            new AddressDTO(2L, "New-York", "Prospect Ave", "581", 1, "5C");
-    private static final AddressDTO BAD_TEST_ADDRESS =
-            new AddressDTO(3L, "Novosibirsk", "Lenina street", "321", 13, "456");
-    private static final AddressDTO FIRST_TEST_ADDRESS_FOR_UPDATE =
-            new AddressDTO(1L, "Update city", "Update street", "Update house number", 987, "update number");
+    private static final UserAddressDTO FIRST_TEST_ADDRESS =
+            new UserAddressDTO(1L, "Moscow", "Sudostroitelnaya street", "12/1", 5, "112");
+    private static final UserAddressDTO SECOND_TEST_ADDRESS =
+            new UserAddressDTO(2L, "New-York", "Prospect Ave", "581", 1, "5C");
+    private static final UserAddressDTO BAD_TEST_ADDRESS =
+            new UserAddressDTO(3L, "Novosibirsk", "Lenina street", "321", 13, "456");
+    private static final UserAddressDTO FIRST_TEST_ADDRESS_FOR_UPDATE =
+            new UserAddressDTO(1L, "Update city", "Update street", "Update house number", 987, "update number");
 
-    AddressServiceImplTest(@Qualifier("addressServiceImpl")AddressService service) {
+    UserAddressServiceImplTest(@Qualifier("addressServiceImpl")AddressService service) {
         this.service = service;
     }
 

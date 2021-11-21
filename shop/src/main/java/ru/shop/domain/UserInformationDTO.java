@@ -8,12 +8,12 @@ public class UserInformationDTO {
     private String lastName;
     private String patronymic;
     private String phone;
-    private AddressDTO address;
+    private UserAddressDTO address;
 
     public UserInformationDTO() {
     }
 
-    public UserInformationDTO(Long id, String firstName, String lastName, String patronymic, String phone, AddressDTO address) {
+    public UserInformationDTO(Long id, String firstName, String lastName, String patronymic, String phone, UserAddressDTO address) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -62,11 +62,11 @@ public class UserInformationDTO {
         this.phone = phone;
     }
 
-    public AddressDTO getAddress() {
+    public UserAddressDTO getAddress() {
         return address;
     }
 
-    public void setAddress(AddressDTO address) {
+    public void setAddress(UserAddressDTO address) {
         this.address = address;
     }
 

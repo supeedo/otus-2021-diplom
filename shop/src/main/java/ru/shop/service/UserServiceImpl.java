@@ -1,5 +1,7 @@
 package ru.shop.service;
 
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.shop.domain.UserDTO;
 import ru.shop.domain.mapper.RoleMapper;
+import ru.shop.domain.mapper.UserInformationMapper;
 import ru.shop.domain.mapper.UserMapper;
 import ru.shop.repository.UserRepository;
 
@@ -22,6 +25,8 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserInformationService userInformationService;
     private final RoleService roleService;
+
+    private final UserMapper userMapper = Mappers.getMapper(UserMapper.class);
 
 
     public UserServiceImpl(UserRepository userRepository,
@@ -43,7 +48,7 @@ public class UserServiceImpl implements UserService {
     public List<UserDTO> getAllUser() {
         final var users = userRepository.findAll();
         return users.stream()
-                .map(UserMapper.INSTANCE::userToUserDto)
+                .map(userMapper::userToUserDto)
                 .collect(Collectors.toList());
     }
 
@@ -54,7 +59,7 @@ public class UserServiceImpl implements UserService {
         final var user = userRepository
                 .findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
-        return UserMapper.INSTANCE.userToUserDto(user);
+        return userMapper.userToUserDto(user);
     }
 
     @Transactional
@@ -67,8 +72,8 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void createNewUser(UserDTO userDto) {
-        final var role = UserMapper.INSTANCE.userDtoToUser(userDto);
-        userRepository.save(role);
+        final var user = userMapper.userDtoToUser(userDto);
+        userRepository.save(user);
     }
 
     //TODO доделать проверку на null

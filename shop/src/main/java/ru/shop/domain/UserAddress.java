@@ -1,19 +1,31 @@
 package ru.shop.domain;
 
+
+import javax.persistence.*;
 import java.util.Objects;
 
-public class AddressDTO {
+@Entity
+@Table(name = "user_address")
+public class UserAddress {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+    @Column(name = "city", nullable = false)
     private String city;
+    @Column(name = "street", nullable = false)
     private String street;
+    @Column(name = "house_number", nullable = false)
     private String houseNumber;
+    @Column(name = "floor", nullable = false)
     private Integer floor;
+    @Column(name = "apartment_number")
     private String apartmentNumber;
 
-    public AddressDTO() {
+    public UserAddress() {
     }
 
-    public AddressDTO(Long id, String city, String street, String houseNumber, Integer floor, String apartmentNumber) {
+    public UserAddress(Long id, String city, String street, String houseNumber, Integer floor, String apartmentNumber) {
         this.id = id;
         this.city = city;
         this.street = street;
@@ -74,24 +86,12 @@ public class AddressDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AddressDTO that = (AddressDTO) o;
-        return Objects.equals(id, that.id) && Objects.equals(city, that.city) && Objects.equals(street, that.street) && Objects.equals(houseNumber, that.houseNumber) && Objects.equals(floor, that.floor) && Objects.equals(apartmentNumber, that.apartmentNumber);
+        UserAddress address = (UserAddress) o;
+        return Objects.equals(id, address.id) && Objects.equals(city, address.city) && Objects.equals(street, address.street) && Objects.equals(houseNumber, address.houseNumber) && Objects.equals(floor, address.floor) && Objects.equals(apartmentNumber, address.apartmentNumber);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, city, street, houseNumber, floor, apartmentNumber);
-    }
-
-    @Override
-    public String toString() {
-        return "AddressDTO{" +
-                "id=" + id +
-                ", city='" + city + '\'' +
-                ", street='" + street + '\'' +
-                ", houseNumber='" + houseNumber + '\'' +
-                ", floor=" + floor +
-                ", apartmentNumber='" + apartmentNumber + '\'' +
-                '}';
     }
 }
