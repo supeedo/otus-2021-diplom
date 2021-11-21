@@ -22,3 +22,13 @@ insert into orders (id, create_time, delivery_time, user_id, note, status_id)
 values (default, '2021-10-19 10:23:54+03', '2021-12-30 23:30:00+03', 1, 'call in an hour', 1);
 insert into orders (id, create_time, delivery_time, user_id, note, status_id)
 values (default, '2021-10-19 10:23:54+03', '2021-12-30 23:30:00+03', 1, 'call in an hour', 1);
+
+insert into product_orders (id, order_id, product_id, product_count)
+values (default, 1, 1, 15);
+insert into product_orders (id, order_id, product_id, product_count)
+values (default, 2, 2, 7);
+
+insert into status_orders (id, status)
+values (default, 'REGISTRATION');
+insert into status_orders (id, status)
+values (default, 'DELIVERY');

@@ -13,17 +13,17 @@ public class Order {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "create_time")
+    @Column(name = "create_time", nullable = false, unique = true)
     private Date createTime;
 
-    @Column(name = "delivery_time")
+    @Column(name = "delivery_time", nullable = false, unique = true)
     private Date deliveryTime;
 
     @Column(name = "note")
     private String note;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "status_id")
+    private Long statusId;
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_user_id"))
@@ -40,12 +40,12 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long id, Date createTime, Date deliveryTime, String note, String status, User user, List<Product> products) {
+    public Order(Long id, Date createTime, Date deliveryTime, String note, Long statusId, User user, List<Product> products) {
         this.id = id;
         this.createTime = createTime;
         this.deliveryTime = deliveryTime;
         this.note = note;
-        this.status = status;
+        this.statusId = statusId;
         this.user = user;
         this.products = products;
     }
@@ -82,12 +82,12 @@ public class Order {
         this.note = note;
     }
 
-    public String getStatus() {
-        return status;
+    public Long getStatus() {
+        return statusId;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(Long statusId) {
+        this.statusId = statusId;
     }
 
     public User getUser() {
@@ -111,12 +111,12 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return Objects.equals(id, order.id) && Objects.equals(createTime, order.createTime) && Objects.equals(deliveryTime, order.deliveryTime) && Objects.equals(note, order.note) && Objects.equals(status, order.status);
+        return Objects.equals(id, order.id) && Objects.equals(createTime, order.createTime) && Objects.equals(deliveryTime, order.deliveryTime) && Objects.equals(note, order.note) && Objects.equals(statusId, order.statusId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, createTime, deliveryTime, note, status);
+        return Objects.hash(id, createTime, deliveryTime, note, statusId);
     }
 
     @Override
@@ -126,7 +126,7 @@ public class Order {
                 ", createTime=" + createTime +
                 ", deliveryTime=" + deliveryTime +
                 ", note='" + note + '\'' +
-                ", status='" + status + '\'' +
+                ", status='" + statusId + '\'' +
                 '}';
     }
 }
