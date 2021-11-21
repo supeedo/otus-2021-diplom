@@ -19,7 +19,7 @@ public class UserInformation {
     @Column(name = "phone")
     private String phone;
     @ManyToOne(targetEntity = Address.class, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "address_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_address_id"))
+    @JoinColumn(name = "user_address_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_address_id"))
     private Address address;
 
     public UserInformation() {

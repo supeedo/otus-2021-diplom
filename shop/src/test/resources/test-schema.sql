@@ -1,11 +1,11 @@
-DROP TABLE IF EXISTS address;
+DROP TABLE IF EXISTS user_address;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS product;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS user_information;
 DROP TABLE IF EXISTS users;
 
-CREATE TABLE address
+CREATE TABLE user_address
 (
     id               SERIAL PRIMARY KEY NOT NULL,
     city             VARCHAR(50)        NOT NULL,
