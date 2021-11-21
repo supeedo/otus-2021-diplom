@@ -8,6 +8,11 @@ values (default, 'USER');
 insert into roles (id, role)
 values (default, 'ADMIN');
 
+insert into status_orders (id, status)
+values (default, 'REGISTRATION');
+insert into status_orders (id, status)
+values (default, 'DELIVERY');
+
 insert into user_address (id, city, street, house_number, floor, apartment_number)
 values (default, 'Moscow', 'Sudostroitelnaya street', '12/1', 5, '112');
 insert into user_address (id, city, street, house_number, floor, apartment_number)
@@ -27,8 +32,3 @@ insert into product_orders (id, order_id, product_id, product_count)
 values (default, 1, 1, 15);
 insert into product_orders (id, order_id, product_id, product_count)
 values (default, 2, 2, 7);
-
-insert into status_orders (id, status)
-values (default, 'REGISTRATION');
-insert into status_orders (id, status)
-values (default, 'DELIVERY');

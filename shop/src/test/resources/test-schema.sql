@@ -27,20 +27,26 @@ CREATE TABLE roles
     role VARCHAR(50)        NOT NULL
 
 );
--- CREATE TABLE user_information
--- (
---     ID      BIGINT AUTO_INCREMENT PRIMARY KEY NOT NULL,
---     book_id VARCHAR(255)                      NOT NULL,
---     comment VARCHAR(555)                      NOT NULL
---
--- );
--- CREATE TABLE users
--- (
---     ID      BIGINT AUTO_INCREMENT PRIMARY KEY NOT NULL,
---     book_id VARCHAR(255)                      NOT NULL,
---     comment VARCHAR(555)                      NOT NULL
---
--- );
+CREATE TABLE users
+(
+    ID           SERIAL PRIMARY KEY NOT NULL,
+    email        VARCHAR(50)        NOT NULL,
+    password     VARCHAR(50)        NOT NULL,
+    user_info_id BIGINT,
+    role_id      BIGINT references roles (id),
+    active       BOOLEAN            NOT NULL
+
+);
+CREATE TABLE user_information
+(
+    ID              SERIAL PRIMARY KEY NOT NULL,
+    first_name      VARCHAR(50)        NOT NULL,
+    last_name       VARCHAR(50)        NOT NULL,
+    patronymic      VARCHAR(50),
+    phone           VARCHAR(50)        NOT NULL,
+    user_address_id BIGINT references user_address (id)
+);
+
 CREATE TABLE product
 (
     ID          SERIAL PRIMARY KEY NOT NULL,
@@ -51,6 +57,12 @@ CREATE TABLE product
     active      BOOLEAN            NOT NULL
 );
 
+CREATE TABLE status_orders
+(
+    id     SERIAL PRIMARY KEY NOT NULL,
+    status VARCHAR(100)       NOT NULL
+);
+
 CREATE TABLE orders
 (
     id            SERIAL PRIMARY KEY NOT NULL,
@@ -58,19 +70,19 @@ CREATE TABLE orders
     delivery_time TIMESTAMP          NOT NULL,
     user_id       BIGINT             NOT NULL,
     note          VARCHAR(2048),
-    status_id        BIGINT references status_orders(id) NOT NULL
+    status_id     BIGINT references status_orders (id)
+--         NOT NULL
 );
 
 CREATE TABLE product_orders
 (
-    id            SERIAL PRIMARY KEY             NOT NULL,
-    order_id      BIGINT references orders (id)  NOT NULL,
-    product_id    BIGINT references product (id) NOT NULL,
-    product_count BIGINT                         NOT NULL
+    id            SERIAL PRIMARY KEY NOT NULL,
+    order_id      BIGINT references orders (id)
+--         NOT NULL
+    ,
+    product_id    BIGINT references product (id)
+--         NOT NULL
+    ,
+    product_count BIGINT             NOT NULL
 );
 
-CREATE TABLE status_orders
-(
-    id     SERIAL PRIMARY KEY NOT NULL,
-    status VARCHAR(100)       NOT NULL
-);
