@@ -22,8 +22,9 @@ public class Order {
     @Column(name = "note")
     private String note;
 
-    @Column(name = "status_id")
-    private Long statusId;
+    @ManyToOne(targetEntity = StatusOrder.class, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "status_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_status_id"))
+    private StatusOrder status;
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_user_id"))
@@ -40,12 +41,12 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long id, Date createTime, Date deliveryTime, String note, Long statusId, User user, List<Product> products) {
+    public Order(Long id, Date createTime, Date deliveryTime, String note, StatusOrder status, User user, List<Product> products) {
         this.id = id;
         this.createTime = createTime;
         this.deliveryTime = deliveryTime;
         this.note = note;
-        this.statusId = statusId;
+        this.status = status;
         this.user = user;
         this.products = products;
     }
@@ -82,12 +83,12 @@ public class Order {
         this.note = note;
     }
 
-    public Long getStatus() {
-        return statusId;
+    public StatusOrder getStatus() {
+        return status;
     }
 
-    public void setStatus(Long statusId) {
-        this.statusId = statusId;
+    public void setStatus(StatusOrder status) {
+        this.status = status;
     }
 
     public User getUser() {
@@ -111,12 +112,12 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return Objects.equals(id, order.id) && Objects.equals(createTime, order.createTime) && Objects.equals(deliveryTime, order.deliveryTime) && Objects.equals(note, order.note) && Objects.equals(statusId, order.statusId);
+        return Objects.equals(id, order.id) && Objects.equals(createTime, order.createTime) && Objects.equals(deliveryTime, order.deliveryTime) && Objects.equals(note, order.note);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, createTime, deliveryTime, note, statusId);
+        return Objects.hash(id, createTime, deliveryTime, note);
     }
 
     @Override
@@ -126,7 +127,7 @@ public class Order {
                 ", createTime=" + createTime +
                 ", deliveryTime=" + deliveryTime +
                 ", note='" + note + '\'' +
-                ", status='" + statusId + '\'' +
+                ", status='" + status.getStatus() + '\'' +
                 '}';
     }
 }

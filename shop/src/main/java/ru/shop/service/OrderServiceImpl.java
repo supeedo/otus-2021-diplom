@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.shop.domain.OrderDTO;
 import ru.shop.domain.mapper.OrderMapper;
 import ru.shop.domain.mapper.ProductMapper;
+import ru.shop.domain.mapper.StatusOrderMapper;
 import ru.shop.domain.mapper.UserMapper;
 import ru.shop.repository.OrderRepository;
 
@@ -25,6 +26,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderMapper orderMapper = Mappers.getMapper(OrderMapper.class);
     private final UserMapper userMapper = Mappers.getMapper(UserMapper.class);
     private final ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
+    private final StatusOrderMapper statusOrderMapper = Mappers.getMapper(StatusOrderMapper.class);
 
     public OrderServiceImpl(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
@@ -82,7 +84,7 @@ public class OrderServiceImpl implements OrderService {
         order.setCreateTime(dto.getCreateTime());
         order.setDeliveryTime(dto.getDeliveryTime());
         order.setNote(dto.getNote());
-        order.setStatus(dto.getStatusId());
+        order.setStatus(statusOrderMapper.statusOrderDtoToStatusOrder(dto.getStatus()));
         order.setUser(userMapper.userDtoToUser(dto.getUser()));
         order.setProducts(dto.getProducts().stream().map(productMapper::productDtoToProduct).collect(Collectors.toList()));
     }

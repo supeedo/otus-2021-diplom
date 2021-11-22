@@ -14,7 +14,7 @@ public class OrderDTO {
 
     private String note;
 
-    private Long statusId;
+    private StatusOrderDTO status;
 
     private UserDTO user;
 
@@ -23,12 +23,12 @@ public class OrderDTO {
     public OrderDTO() {
     }
 
-    public OrderDTO(Long id, Date createTime, Date deliveryTime, String note, Long statusId, UserDTO user, List<ProductDTO> products) {
+    public OrderDTO(Long id, Date createTime, Date deliveryTime, String note, StatusOrderDTO status, UserDTO user, List<ProductDTO> products) {
         this.id = id;
         this.createTime = createTime;
         this.deliveryTime = deliveryTime;
         this.note = note;
-        this.statusId = statusId;
+        this.status = status;
         this.user = user;
         this.products = products;
     }
@@ -65,12 +65,12 @@ public class OrderDTO {
         this.note = note;
     }
 
-    public Long getStatusId() {
-        return statusId;
+    public StatusOrderDTO getStatus() {
+        return status;
     }
 
-    public void setStatusId(Long statusId) {
-        this.statusId = statusId;
+    public void setStatus(StatusOrderDTO status) {
+        this.status = status;
     }
 
     public UserDTO getUser() {
@@ -94,12 +94,12 @@ public class OrderDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderDTO orderDTO = (OrderDTO) o;
-        return Objects.equals(id, orderDTO.id) && Objects.equals(createTime, orderDTO.createTime) && Objects.equals(deliveryTime, orderDTO.deliveryTime) && Objects.equals(note, orderDTO.note) && Objects.equals(statusId, orderDTO.statusId);
+        return Objects.equals(id, orderDTO.id) && Objects.equals(createTime, orderDTO.createTime) && Objects.equals(deliveryTime, orderDTO.deliveryTime) && Objects.equals(note, orderDTO.note);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, createTime, deliveryTime, note, statusId);
+        return Objects.hash(id, createTime, deliveryTime, note);
     }
 
     @Override
@@ -109,7 +109,7 @@ public class OrderDTO {
                 ", createTime=" + createTime +
                 ", deliveryTime=" + deliveryTime +
                 ", note='" + note + '\'' +
-                ", statusId=" + statusId +
+                ", statusId=" + status.getStatus() +
                 '}';
     }
 }

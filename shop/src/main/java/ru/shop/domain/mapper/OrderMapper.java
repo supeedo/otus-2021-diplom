@@ -7,7 +7,7 @@ import ru.shop.domain.Order;
 import ru.shop.domain.OrderDTO;
 
 @Mapper(componentModel = "spring",
-        uses = {UserMapper.class, ProductMapper.class})
+        uses = {UserMapper.class, ProductMapper.class, StatusOrderMapper.class})
 public interface OrderMapper {
 
     @Mappings({
@@ -15,7 +15,7 @@ public interface OrderMapper {
             @Mapping(source = "createTime", target = "createTime"),
             @Mapping(source = "deliveryTime", target = "deliveryTime"),
             @Mapping(source = "note", target = "note"),
-            @Mapping(source = "statusId", target = "statusId"),
+            @Mapping(source = "status", target = "status"),
             @Mapping(source = "user", target = "user"),
             @Mapping(source = "products", target = "products"),
 
@@ -27,7 +27,7 @@ public interface OrderMapper {
             @Mapping(source = "createTime", target = "createTime"),
             @Mapping(source = "deliveryTime", target = "deliveryTime"),
             @Mapping(source = "note", target = "note"),
-            @Mapping(source = "statusId", target = "statusId"),
+            @Mapping(source = "status", target = "status"),
             @Mapping(source = "user", target = "user"),
             @Mapping(source = "products", target = "products"),
 
