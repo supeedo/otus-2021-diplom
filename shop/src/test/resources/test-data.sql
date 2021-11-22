@@ -38,7 +38,7 @@ values (default, 1, 'call in an hour', 1);
 insert into orders (id, user_id, note, status_id)
 values (default, 1, 'call in an hour', 1);
 
-insert into product_orders (id, order_id, product_id, product_count)
-values (default, 1, 1, 15);
-insert into product_orders (id, order_id, product_id, product_count)
-values (default, 2, 1, 7);
+insert into product_orders (id, product_id, product_count)
+values (default, 1, 15);
+insert into product_orders (id, product_id, product_count)
+values (default, 1, 7);

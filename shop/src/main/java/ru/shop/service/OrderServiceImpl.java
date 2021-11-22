@@ -6,10 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.shop.domain.OrderDTO;
-import ru.shop.domain.mapper.OrderMapper;
-import ru.shop.domain.mapper.ProductMapper;
-import ru.shop.domain.mapper.StatusOrderMapper;
-import ru.shop.domain.mapper.UserMapper;
+import ru.shop.domain.mapper.*;
 import ru.shop.repository.OrderRepository;
 
 import javax.persistence.EntityNotFoundException;
@@ -25,7 +22,7 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderMapper orderMapper = Mappers.getMapper(OrderMapper.class);
     private final UserMapper userMapper = Mappers.getMapper(UserMapper.class);
-    private final ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
+    private final ProductOrdersMapper productOrderMapper = Mappers.getMapper(ProductOrdersMapper.class);
     private final StatusOrderMapper statusOrderMapper = Mappers.getMapper(StatusOrderMapper.class);
 
     public OrderServiceImpl(OrderRepository orderRepository) {
@@ -84,6 +81,9 @@ public class OrderServiceImpl implements OrderService {
         order.setNote(dto.getNote());
         order.setStatus(statusOrderMapper.statusOrderDtoToStatusOrder(dto.getStatus()));
         order.setUser(userMapper.userDtoToUser(dto.getUser()));
-        order.setProducts(dto.getProducts().stream().map(productMapper::productDtoToProduct).collect(Collectors.toList()));
+        order.setProducts(dto.getProducts()
+                .stream()
+                .map(productOrderMapper::productDtoToProductOrders)
+                .collect(Collectors.toList()));
     }
 }

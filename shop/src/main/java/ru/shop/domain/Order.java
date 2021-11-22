@@ -1,7 +1,6 @@
 package ru.shop.domain;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,18 +23,18 @@ public class Order {
     @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_user_id"))
     private User user;
 
-    @ManyToMany(cascade ={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(cascade = CascadeType.REMOVE)
     @JoinTable(
             name = "product_orders",
             joinColumns = {@JoinColumn(name = "order_id")},
             inverseJoinColumns = {@JoinColumn(name = "product_id")}
     )
-    private List<Product> products;
+    private List<ProductOrders> products;
 
     public Order() {
     }
 
-    public Order(Long id, String note, StatusOrder status, User user, List<Product> products) {
+    public Order(Long id, String note, StatusOrder status, User user, List<ProductOrders> products) {
         this.id = id;
         this.note = note;
         this.status = status;
@@ -75,11 +74,11 @@ public class Order {
         this.user = user;
     }
 
-    public List<Product> getProducts() {
+    public List<ProductOrders> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(List<ProductOrders> products) {
         this.products = products;
     }
 

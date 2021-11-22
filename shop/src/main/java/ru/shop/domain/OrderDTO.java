@@ -1,7 +1,6 @@
 package ru.shop.domain;
 
-//import java.util.Date;
-import java.sql.Date;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -15,7 +14,7 @@ public class OrderDTO {
 
     private UserDTO user;
 
-    private List<ProductDTO> products;
+    private List<ProductOrdersDTO> products;
 
     public OrderDTO() {
     }
@@ -24,7 +23,7 @@ public class OrderDTO {
                     String note,
                     StatusOrderDTO status,
                     UserDTO user,
-                    List<ProductDTO> products) {
+                    List<ProductOrdersDTO> products) {
         this.id = id;
         this.note = note;
         this.status = status;
@@ -64,11 +63,11 @@ public class OrderDTO {
         this.user = user;
     }
 
-    public List<ProductDTO> getProducts() {
+    public List<ProductOrdersDTO> getProducts() {
         return products;
     }
 
-    public void setProducts(List<ProductDTO> products) {
+    public void setProducts(List<ProductOrdersDTO> products) {
         this.products = products;
     }
 
