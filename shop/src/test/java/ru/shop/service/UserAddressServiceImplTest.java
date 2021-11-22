@@ -16,7 +16,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 @DisplayName("Address service tests")
 class UserAddressServiceImplTest {
 
-    private final AddressService service;
+    private final UserAddressService service;
 
     private static final Long COUNT_TEST_ADDRESS = 2L;
     private static final Long BAD_COUNT_TEST_ADDRESS = 3L;
@@ -29,7 +29,7 @@ class UserAddressServiceImplTest {
     private static final UserAddressDTO FIRST_TEST_ADDRESS_FOR_UPDATE =
             new UserAddressDTO(1L, "Update city", "Update street", "Update house number", 987, "update number");
 
-    UserAddressServiceImplTest(@Qualifier("addressServiceImpl")AddressService service) {
+    UserAddressServiceImplTest(@Qualifier("userAddressServiceImpl") UserAddressService service) {
         this.service = service;
     }
 

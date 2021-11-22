@@ -19,12 +19,12 @@ public class UserInformationServiceImpl implements UserInformationService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserInformationServiceImpl.class.getName());
 
     private final UserInformationRepository userInformationRepository;
-    private final AddressService addressService;
+    private final UserAddressService addressService;
 
     private final UserInformationMapper userInformationMapper = Mappers.getMapper(UserInformationMapper.class);
     private final UserAddressMapper userAddressMapper = Mappers.getMapper(UserAddressMapper.class);
 
-    public UserInformationServiceImpl(UserInformationRepository userInformationRepository, AddressService addressService) {
+    public UserInformationServiceImpl(UserInformationRepository userInformationRepository, UserAddressService addressService) {
         this.userInformationRepository = userInformationRepository;
         this.addressService = addressService;
     }

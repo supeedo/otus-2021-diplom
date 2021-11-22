@@ -14,14 +14,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class AddressServiceImpl implements AddressService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AddressServiceImpl.class.getName());
+public class UserAddressServiceImpl implements UserAddressService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserAddressServiceImpl.class.getName());
 
     private final AddressRepository addressRepository;
 
     private final UserAddressMapper userAddressMapper = Mappers.getMapper(UserAddressMapper.class);
 
-    public AddressServiceImpl(AddressRepository addressRepository) {
+    public UserAddressServiceImpl(AddressRepository addressRepository) {
         this.addressRepository = addressRepository;
     }
 

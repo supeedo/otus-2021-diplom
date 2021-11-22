@@ -4,7 +4,7 @@ import ru.shop.domain.UserAddressDTO;
 
 import java.util.List;
 
-public interface AddressService {
+public interface UserAddressService {
     Long getCountAddress();
 
     List<UserAddressDTO> getAllAddress();
