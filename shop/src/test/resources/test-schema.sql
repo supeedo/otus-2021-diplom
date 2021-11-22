@@ -1,9 +1,15 @@
 DROP TABLE IF EXISTS user_address;
 DROP TABLE IF EXISTS categories;
-DROP TABLE IF EXISTS product;
 DROP TABLE IF EXISTS roles;
-DROP TABLE IF EXISTS user_information;
+DROP TABLE IF EXISTS status_orders;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS user_information;
+DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS product_orders;
+
+
+
 
 CREATE TABLE user_address
 (
@@ -26,6 +32,11 @@ CREATE TABLE roles
     id   SERIAL PRIMARY KEY NOT NULL,
     role VARCHAR(50)        NOT NULL
 
+);
+CREATE TABLE status_orders
+(
+    id     SERIAL PRIMARY KEY NOT NULL,
+    status VARCHAR(100)       NOT NULL
 );
 CREATE TABLE users
 (
@@ -57,11 +68,6 @@ CREATE TABLE product
     active      BOOLEAN            NOT NULL
 );
 
-CREATE TABLE status_orders
-(
-    id     SERIAL PRIMARY KEY NOT NULL,
-    status VARCHAR(100)       NOT NULL
-);
 
 CREATE TABLE orders
 (
