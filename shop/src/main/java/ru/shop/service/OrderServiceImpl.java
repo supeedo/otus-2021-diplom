@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.shop.domain.OrderDTO;
 import ru.shop.domain.mapper.OrderMapper;
+import ru.shop.domain.mapper.ProductMapper;
+import ru.shop.domain.mapper.UserMapper;
 import ru.shop.repository.OrderRepository;
 
 import javax.persistence.EntityNotFoundException;
@@ -21,6 +23,8 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
 
     private final OrderMapper orderMapper = Mappers.getMapper(OrderMapper.class);
+    private final UserMapper userMapper = Mappers.getMapper(UserMapper.class);
+    private final ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
 
     public OrderServiceImpl(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
@@ -61,20 +65,25 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional(readOnly = true)
     @Override
-    public void createNewOrder(OrderDTO orderDto) {
-        LOGGER.debug("Create order by dto = {}", orderDto);
-        final var order = orderMapper.orderDtoToOrder(orderDto);
+    public void createNewOrder(OrderDTO dto) {
+        LOGGER.debug("Create order by dto = {}", dto);
+        final var order = orderMapper.orderDtoToOrder(dto);
         orderRepository.save(order);
     }
 
-    //TODO доделать проверку на null
     @Transactional(readOnly = true)
     @Override
-    public void updateOrder(OrderDTO orderDto) {
-        LOGGER.debug("Update order by dto = {}", orderDto);
-        //TODO сформировать ДТО
-//        final var order = orderRepository
-//                .findById(orderDto.getId())
-//                .orElseThrow(() -> new EntityNotFoundException("Order not found"));
+    public void updateOrder(OrderDTO dto) {
+        LOGGER.debug("Update order by dto = {}", dto);
+
+        final var order = orderRepository
+                .findById(dto.getId())
+                .orElseThrow(() -> new EntityNotFoundException("Order not found"));
+        order.setCreateTime(dto.getCreateTime());
+        order.setDeliveryTime(dto.getDeliveryTime());
+        order.setNote(dto.getNote());
+        order.setStatus(dto.getStatusId());
+        order.setUser(userMapper.userDtoToUser(dto.getUser()));
+        order.setProducts(dto.getProducts().stream().map(productMapper::productDtoToProduct).collect(Collectors.toList()));
     }
 }
