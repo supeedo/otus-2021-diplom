@@ -31,4 +31,4 @@ values (default, '2021-10-19 10:23:54+03', '2021-12-30 23:30:00+03', 1, 'call in
 insert into product_orders (id, order_id, product_id, product_count)
 values (default, 1, 1, 15);
 insert into product_orders (id, order_id, product_id, product_count)
-values (default, 2, 2, 7);
+values (default, 2, 1, 7);

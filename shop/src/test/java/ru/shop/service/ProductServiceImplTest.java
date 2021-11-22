@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.annotation.DirtiesContext;
 import ru.shop.domain.CategoryDTO;
 import ru.shop.domain.ProductDTO;
@@ -81,17 +82,25 @@ class ProductServiceImplTest {
     @DisplayName("Deleting an product by id works as expected")
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void deleteProductById() {
-        final var actualProduct = service.getProductById(FIRST_TEST_PRODUCT.getId());
+        final var actualProduct = service.getProductById(SECOND_TEST_PRODUCT.getId());
         assertThat(actualProduct)
                 .isNotNull()
-                .isEqualTo(FIRST_TEST_PRODUCT)
-                .isNotEqualTo(SECOND_TEST_PRODUCT)
+                .isEqualTo(SECOND_TEST_PRODUCT)
+                .isNotEqualTo(FIRST_TEST_PRODUCT)
                 .isNotEqualTo(BAD_TEST_PRODUCT);
-        service.deleteProductById(FIRST_TEST_PRODUCT.getId());
+        service.deleteProductById(SECOND_TEST_PRODUCT.getId());
         final var thrown = catchThrowable(() ->
-                service.getProductById(FIRST_TEST_PRODUCT.getId()));
+                service.getProductById(SECOND_TEST_PRODUCT.getId()));
         assertThat(thrown)
                 .isInstanceOf(EntityNotFoundException.class)
+                .isNotInstanceOf(NullPointerException.class);
+
+        final var thrownForReferencesKey = catchThrowable(() ->
+                service.deleteProductById(FIRST_TEST_PRODUCT.getId())
+        );
+        assertThat(thrownForReferencesKey)
+                .isInstanceOf(DataIntegrityViolationException.class)
+                .isNotInstanceOf(EntityNotFoundException.class)
                 .isNotInstanceOf(NullPointerException.class);
     }
 
