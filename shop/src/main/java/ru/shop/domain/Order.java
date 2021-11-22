@@ -1,7 +1,7 @@
 package ru.shop.domain;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,12 +12,6 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-    @Column(name = "create_time", nullable = false, unique = true)
-    private Date createTime;
-
-    @Column(name = "delivery_time", nullable = false, unique = true)
-    private Date deliveryTime;
 
     @Column(name = "note")
     private String note;
@@ -30,7 +24,7 @@ public class Order {
     @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_user_id"))
     private User user;
 
-    @ManyToMany
+    @ManyToMany(cascade ={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name = "product_orders",
             joinColumns = {@JoinColumn(name = "order_id")},
@@ -41,10 +35,8 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long id, Date createTime, Date deliveryTime, String note, StatusOrder status, User user, List<Product> products) {
+    public Order(Long id, String note, StatusOrder status, User user, List<Product> products) {
         this.id = id;
-        this.createTime = createTime;
-        this.deliveryTime = deliveryTime;
         this.note = note;
         this.status = status;
         this.user = user;
@@ -57,22 +49,6 @@ public class Order {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getDeliveryTime() {
-        return deliveryTime;
-    }
-
-    public void setDeliveryTime(Date deliveryTime) {
-        this.deliveryTime = deliveryTime;
     }
 
     public String getNote() {
@@ -112,20 +88,18 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return Objects.equals(id, order.id) && Objects.equals(createTime, order.createTime) && Objects.equals(deliveryTime, order.deliveryTime) && Objects.equals(note, order.note);
+        return Objects.equals(id, order.id)  && Objects.equals(note, order.note);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, createTime, deliveryTime, note);
+        return Objects.hash(id, note);
     }
 
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", createTime=" + createTime +
-                ", deliveryTime=" + deliveryTime +
                 ", note='" + note + '\'' +
                 ", status='" + status.getStatus() + '\'' +
                 '}';

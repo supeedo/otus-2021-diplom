@@ -76,7 +76,6 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-    //TODO доделать проверку на null
     @Transactional
     @Override
     public void updateUser(UserDTO userDto) {

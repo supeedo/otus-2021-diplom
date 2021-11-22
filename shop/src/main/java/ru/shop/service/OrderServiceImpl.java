@@ -42,7 +42,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDTO> getAllOrder() {
         final var orders = orderRepository.findAll();
-        System.out.println(orders);
         return orders.stream()
                 .map(orderMapper::orderToOrderDto)
                 .collect(Collectors.toList());
@@ -59,14 +58,14 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.orderToOrderDto(order);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void deleteOrderById(Long orderId) {
         LOGGER.debug("Delete order by id = {}", orderId);
         orderRepository.deleteById(orderId);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void createNewOrder(OrderDTO dto) {
         LOGGER.debug("Create order by dto = {}", dto);
@@ -74,7 +73,7 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.save(order);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void updateOrder(OrderDTO dto) {
         LOGGER.debug("Update order by dto = {}", dto);
@@ -82,8 +81,6 @@ public class OrderServiceImpl implements OrderService {
         final var order = orderRepository
                 .findById(dto.getId())
                 .orElseThrow(() -> new EntityNotFoundException("Order not found"));
-        order.setCreateTime(dto.getCreateTime());
-        order.setDeliveryTime(dto.getDeliveryTime());
         order.setNote(dto.getNote());
         order.setStatus(statusOrderMapper.statusOrderDtoToStatusOrder(dto.getStatus()));
         order.setUser(userMapper.userDtoToUser(dto.getUser()));

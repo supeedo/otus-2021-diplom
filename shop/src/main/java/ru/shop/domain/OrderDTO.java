@@ -1,16 +1,13 @@
 package ru.shop.domain;
 
-import java.util.Date;
+//import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
 public class OrderDTO {
 
     private Long id;
-
-    private Date createTime;
-
-    private Date deliveryTime;
 
     private String note;
 
@@ -23,10 +20,12 @@ public class OrderDTO {
     public OrderDTO() {
     }
 
-    public OrderDTO(Long id, Date createTime, Date deliveryTime, String note, StatusOrderDTO status, UserDTO user, List<ProductDTO> products) {
+    public OrderDTO(Long id,
+                    String note,
+                    StatusOrderDTO status,
+                    UserDTO user,
+                    List<ProductDTO> products) {
         this.id = id;
-        this.createTime = createTime;
-        this.deliveryTime = deliveryTime;
         this.note = note;
         this.status = status;
         this.user = user;
@@ -39,22 +38,6 @@ public class OrderDTO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getDeliveryTime() {
-        return deliveryTime;
-    }
-
-    public void setDeliveryTime(Date deliveryTime) {
-        this.deliveryTime = deliveryTime;
     }
 
     public String getNote() {
@@ -94,20 +77,18 @@ public class OrderDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderDTO orderDTO = (OrderDTO) o;
-        return Objects.equals(id, orderDTO.id) && Objects.equals(createTime, orderDTO.createTime) && Objects.equals(deliveryTime, orderDTO.deliveryTime) && Objects.equals(note, orderDTO.note);
+        return Objects.equals(id, orderDTO.id) && Objects.equals(note, orderDTO.note);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, createTime, deliveryTime, note);
+        return Objects.hash(id, note);
     }
 
     @Override
     public String toString() {
         return "OrderDTO{" +
                 "id=" + id +
-                ", createTime=" + createTime +
-                ", deliveryTime=" + deliveryTime +
                 ", note='" + note + '\'' +
                 ", statusId=" + status.getStatus() +
                 '}';

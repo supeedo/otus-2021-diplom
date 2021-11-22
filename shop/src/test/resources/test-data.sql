@@ -33,10 +33,10 @@ values (default, 1, 'Lenovo', 'lenovo laptop', 120.0, true);
 insert into product (id, category_id, name, description, price, active)
 values (default, 1, 'Macbook pro', 'Apple laptop 16"', 250.0, true);
 
-insert into orders (id, create_time, delivery_time, user_id, note, status_id)
-values (default, '2021-10-19 10:23:54+03', '2021-12-30 23:30:00+03', 1, 'call in an hour', 1);
-insert into orders (id, create_time, delivery_time, user_id, note, status_id)
-values (default, '2021-10-19 10:23:54+03', '2021-12-30 23:30:00+03', 1, 'call in an hour', 1);
+insert into orders (id, user_id, note, status_id)
+values (default, 1, 'call in an hour', 1);
+insert into orders (id, user_id, note, status_id)
+values (default, 1, 'call in an hour', 1);
 
 insert into product_orders (id, order_id, product_id, product_count)
 values (default, 1, 1, 15);

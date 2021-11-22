@@ -13,6 +13,15 @@ public class UserDTO {
     public UserDTO() {
     }
 
+    public UserDTO(Long id, String email, String password, UserInformationDTO userInformation, RoleDTO role, boolean active) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.userInformation = userInformation;
+        this.active = active;
+        this.role = role;
+    }
+
     public Long getId() {
         return id;
     }

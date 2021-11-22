@@ -70,24 +70,17 @@ CREATE TABLE product
 
 CREATE TABLE orders
 (
-    id            SERIAL PRIMARY KEY NOT NULL,
-    create_time   TIMESTAMP          NOT NULL,
-    delivery_time TIMESTAMP          NOT NULL,
-    user_id       BIGINT             NOT NULL,
-    note          VARCHAR(2048),
-    status_id     BIGINT references status_orders (id)
---         NOT NULL
+    id        SERIAL PRIMARY KEY NOT NULL,
+    user_id   BIGINT             NOT NULL,
+    note      VARCHAR(2048),
+    status_id BIGINT references status_orders (id)
 );
 
 CREATE TABLE product_orders
 (
     id            SERIAL PRIMARY KEY NOT NULL,
-    order_id      BIGINT references orders (id)
---         NOT NULL
-    ,
-    product_id    BIGINT references product (id)
---         NOT NULL
-    ,
+    order_id      BIGINT references orders (id),
+    product_id    BIGINT             NOT NULL,
     product_count BIGINT             NOT NULL
 );
 
