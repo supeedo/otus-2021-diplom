@@ -21,64 +21,46 @@ import java.util.List;
 public class CategoryController {
 
     @GetMapping("/")
-    @Operation(summary = "Получение всех категорий", tags = "category")
+    @Operation(summary = "Получение всех категорий", tags = "category", description = "Позволяет получить список всех категорий")
     @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "200", description = "Found the categories",
-                    content = {
-                            @Content(
-                                    mediaType = "application/json",
-                                    schema = @Schema(implementation = CategoryDTO.class ))
-                    }),
-            @ApiResponse(
-                    responseCode = "500", description = "Server error"
-                    //дописать контент ошибок и схему
-            ),
-            @ApiResponse(
-                    responseCode = "404", description = "Category not found"
-            )
+            @ApiResponse(responseCode = "200",
+                    description = "Details of All the Participants",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = CategoryDTO.class ) )}),
+            @ApiResponse(responseCode = "404",
+                    description = "Category not found",
+                    content = @Content),
+            @ApiResponse(responseCode = "500",
+                    description = "Server error",
+                    content = @Content)
     })
-    @ResponseStatus(HttpStatus.OK)
     public List<CategoryDTO> getAllCategory() {
         return new ArrayList<>();
     }
 
-
-
     @GetMapping("/{id}")
+    @Operation(summary = "Получение категории по id", tags = "category")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Category found" )
     })
-    @ResponseStatus(HttpStatus.OK)
     public CategoryDTO getCategoryById(@PathVariable String id) {
         return new CategoryDTO();
     }
 
-
-
-
-
-
     @PutMapping("/")
+    @Operation(summary = "Добавление новой категории", tags = "category")
     @ResponseStatus(HttpStatus.OK)
     public void addCategory(){
     }
 
-
-
-
-
     @PostMapping("/{id}")
+    @Operation(summary = "Обновление категории", tags = "category")
     @ResponseStatus(HttpStatus.OK)
     public String updateCategoryById(@PathVariable String id, @RequestBody String categoryDTO){
         return null;
     }
 
-
-
-
-
     @DeleteMapping("/{id}")
+    @Operation(summary = "Удаление категории", tags = "category")
     @ResponseStatus(HttpStatus.OK)
     public String deleteCategoryById(@PathVariable String id){
         return null;
