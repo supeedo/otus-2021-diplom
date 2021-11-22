@@ -10,7 +10,6 @@ DROP TABLE IF EXISTS product_orders;
 
 
 
-
 CREATE TABLE user_address
 (
     id               SERIAL PRIMARY KEY NOT NULL,
@@ -40,7 +39,7 @@ CREATE TABLE status_orders
 );
 CREATE TABLE users
 (
-    ID           SERIAL PRIMARY KEY NOT NULL,
+    id           SERIAL PRIMARY KEY NOT NULL,
     email        VARCHAR(50)        NOT NULL,
     password     VARCHAR(50)        NOT NULL,
     user_info_id BIGINT,
@@ -50,7 +49,7 @@ CREATE TABLE users
 );
 CREATE TABLE user_information
 (
-    ID              SERIAL PRIMARY KEY NOT NULL,
+    id              SERIAL PRIMARY KEY NOT NULL,
     first_name      VARCHAR(50)        NOT NULL,
     last_name       VARCHAR(50)        NOT NULL,
     patronymic      VARCHAR(50),
@@ -60,7 +59,7 @@ CREATE TABLE user_information
 
 CREATE TABLE product
 (
-    ID          SERIAL PRIMARY KEY NOT NULL,
+    id          SERIAL PRIMARY KEY NOT NULL,
     category_id BIGINT             NOT NULL,
     name        VARCHAR(100)       NOT NULL,
     description VARCHAR(2048),

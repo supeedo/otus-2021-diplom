@@ -14,14 +14,14 @@ public interface StatusOrderMapper {
 
 
     @Mappings({
-            @Mapping(source = "id", target = "id"),
-            @Mapping(source = "status", target = "status")
+            @Mapping(target = "id", source = "entity.id"),
+            @Mapping(target = "status", source = "entity.status")
     })
     StatusOrderDTO statusOrderToStatusOrderDto(StatusOrder entity);
 
     @Mappings({
-            @Mapping(source = "id", target = "id"),
-            @Mapping(source = "status", target = "status")
+            @Mapping(target = "id", source = "dto.id"),
+            @Mapping(target = "status", source = "dto.status")
     })
     StatusOrder statusOrderDtoToStatusOrder(StatusOrderDTO dto);
 }

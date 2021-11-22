@@ -18,6 +18,16 @@ values (default, 'Moscow', 'Sudostroitelnaya street', '12/1', 5, '112');
 insert into user_address (id, city, street, house_number, floor, apartment_number)
 values (default, 'New-York', 'Prospect Ave', '581', 1, '5C');
 
+insert into users (id, email, password, user_info_id, role_id, active)
+values (default, 'test@test-host.ru', 'qwerty', 1, 1, true);
+insert into users (id, email, password, user_info_id, role_id, active)
+values (default, 'test2@test-host.ru', 'ytrewq', 2, 1, true);
+
+insert into user_information (id, first_name, last_name, patronymic, phone, user_address_id)
+values (default, 'Ivanov', 'Ivan', 'Ivanovich', '88001231212', '1');
+insert into user_information (id, first_name, last_name, patronymic, phone, user_address_id)
+values (default, 'Jimmy', 'Alish', null, 88003213232, '1');
+
 insert into product (id, category_id, name, description, price, active)
 values (default, 1, 'Lenovo', 'lenovo laptop', 120.0, true);
 insert into product (id, category_id, name, description, price, active)
