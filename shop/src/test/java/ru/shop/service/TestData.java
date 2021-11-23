@@ -4,7 +4,7 @@ import ru.shop.domain.*;
 
 import java.util.List;
 
-public class TestConfigurationData {
+public class TestData {
 
      static final UserAddressDTO FIRST_TEST_ADDRESS =
             new UserAddressDTO(1L, "Moscow", "Sudostroitelnaya street", "12/1", 5, "112");
@@ -57,38 +57,6 @@ public class TestConfigurationData {
      static final UserDTO FIRST_TEST_USER_FOR_UPDATE =
             new UserDTO(1L, "update@update-host.ru", "update", FIRST_TEST_USER_INFORMATION_FOR_UPDATE, FIRST_TEST_ROLE_FOR_UPDATE, false);
 
-     static final ProductOrdersDTO FIRST_TEST_PRODUCT_ORDER =
-             new ProductOrdersDTO(1L, FIRST_TEST_PRODUCT, 5L);
-     static final ProductOrdersDTO SECOND_TEST_PRODUCT_ORDER =
-             new ProductOrdersDTO(1L, FIRST_TEST_PRODUCT, 10L);
-     static final ProductOrdersDTO BAD_TEST_PRODUCT_ORDER =
-             new ProductOrdersDTO(1L, FIRST_TEST_PRODUCT, 15L);
-     static final ProductOrdersDTO FIRST_TEST_PRODUCT_ORDER_FOR_UPDATE =
-             new ProductOrdersDTO(1L, FIRST_TEST_PRODUCT, 25L);
 
-     static final OrderDTO FIRST_TEST_ORDER = new OrderDTO(
-             1L,
-             "call in an hour",
-             FIRST_TEST_STATUS,
-             FIRST_TEST_USER,
-             List.of(FIRST_TEST_PRODUCT_ORDER));
-     static final OrderDTO SECOND_TEST_ORDER = new OrderDTO(
-             2L,
-             "call in an hour",
-             FIRST_TEST_STATUS,
-             FIRST_TEST_USER,
-             List.of(FIRST_TEST_PRODUCT_ORDER, SECOND_TEST_PRODUCT_ORDER));
-     static final OrderDTO BAD_TEST_ORDER = new OrderDTO(
-             3L,
-             "bad test node",
-             BAD_TEST_STATUS,
-             BAD_TEST_USER,
-             List.of(FIRST_TEST_PRODUCT_ORDER));
-     static final OrderDTO FIRST_TEST_ORDER_FOR_UPDATE = new OrderDTO(
-             1L,
-             "update test node",
-             FIRST_TEST_STATUS_FOR_UPDATE,
-             FIRST_TEST_USER_FOR_UPDATE,
-             List.of(FIRST_TEST_PRODUCT_ORDER, SECOND_TEST_PRODUCT_ORDER));
 
 }

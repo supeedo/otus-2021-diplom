@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.annotation.DirtiesContext;
 import ru.shop.domain.RoleDTO;
 
@@ -67,18 +68,31 @@ class RoleServiceImplTest {
     @DisplayName("Deleting an role by id works as expected")
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void deleteRoleById() {
-        final var actualRole = service.getRoleById(FIRST_TEST_ROLE.getId());
+        final var actualRole = service.getRoleById(SECOND_TEST_ROLE.getId());
         assertThat(actualRole)
                 .isNotNull()
-                .isEqualTo(FIRST_TEST_ROLE)
-                .isNotEqualTo(SECOND_TEST_ROLE)
+                .isEqualTo(SECOND_TEST_ROLE)
+                .isNotEqualTo(FIRST_TEST_ROLE)
                 .isNotEqualTo(BAD_TEST_ROLE);
-        service.deleteRoleById(FIRST_TEST_ROLE.getId());
+        service.deleteRoleById(SECOND_TEST_ROLE.getId());
         final var thrown = catchThrowable(() ->
-                service.getRoleById(FIRST_TEST_ROLE.getId())
+                service.getRoleById(SECOND_TEST_ROLE.getId())
         );
         assertThat(thrown)
                 .isInstanceOf(EntityNotFoundException.class)
+                .isNotInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    @DisplayName("Deleting an role by id if role use by users")
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
+    void deleteRoleByIdIfUses() {
+        final var thrownForReferencesKey = catchThrowable(() ->
+                service.deleteRoleById(FIRST_TEST_ROLE.getId())
+        );
+        assertThat(thrownForReferencesKey)
+                .isInstanceOf(DataIntegrityViolationException.class)
+                .isNotInstanceOf(EntityNotFoundException.class)
                 .isNotInstanceOf(NullPointerException.class);
     }
 
