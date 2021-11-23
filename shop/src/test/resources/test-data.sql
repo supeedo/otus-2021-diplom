@@ -33,3 +33,13 @@ values (default, 1, 'Lenovo', 'lenovo laptop', 120.0, true);
 insert into product (id, category_id, name, description, price, active)
 values (default, 1, 'Macbook pro', 'Apple laptop 16"', 250.0, true);
 
+insert into orders (id, user_id, note, status_id)
+values (default, 1, 'some test notes one', 1);
+insert into orders (id, user_id, note, status_id)
+values (default, 1, 'some test notes two', 1);
+
+insert into product_orders (id, order_id, product_id, product_count)
+values (default, 1, 1, 15);
+insert into product_orders (id, order_id, product_id, product_count)
+values (default, 1, 1, 25);
+

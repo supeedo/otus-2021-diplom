@@ -1,9 +1,9 @@
+DROP TABLE IF EXISTS user_information;
 DROP TABLE IF EXISTS user_address;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS status_orders;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS user_information;
 DROP TABLE IF EXISTS product;
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS product_orders;
@@ -66,6 +66,24 @@ CREATE TABLE product
     description VARCHAR(2048),
     price       DOUBLE PRECISION   NOT NULL,
     active      BOOLEAN            NOT NULL
+);
+
+CREATE TABLE orders
+(
+    id        SERIAL PRIMARY KEY NOT NULL,
+--     create_time   TIMESTAMP                            NOT NULL,
+--     delivery_time TIMESTAMP                            NOT NULL,
+    user_id   BIGINT             NOT NULL,
+    note      VARCHAR(2048),
+    status_id BIGINT             NOT NULL references status_orders (id)
+);
+
+CREATE TABLE product_orders
+(
+    id            SERIAL PRIMARY KEY NOT NULL,
+    order_id      BIGINT             NOT NULL references orders (id),
+    product_id    BIGINT             NOT NULL references product (id),
+    product_count BIGINT             NOT NULL
 );
 
 

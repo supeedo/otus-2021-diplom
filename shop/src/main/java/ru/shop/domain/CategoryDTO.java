@@ -1,10 +1,17 @@
 package ru.shop.domain;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 public class CategoryDTO {
+    @NotNull
     private Long id;
+    @NotNull
+    @Length(min = 3, max = 50)
     private String categoryName;
+    @Length(max = 255)
     private String description;
 
     public CategoryDTO() {
