@@ -14,12 +14,13 @@ public class User {
     private String email;
     @Column(name = "password", nullable = false)
     private String password;
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @OneToOne(targetEntity = UserInformation.class, fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+//    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "user_info_id", referencedColumnName = "id")
     private UserInformation userInformation;
     @Column(name = "active", nullable = false)
     private boolean active;
-    @ManyToOne(targetEntity = Role.class, fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne(targetEntity = Role.class, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "role_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_role_id"))
     private Role role;
 

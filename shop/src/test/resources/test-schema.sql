@@ -37,6 +37,15 @@ CREATE TABLE status_orders
     id     SERIAL PRIMARY KEY NOT NULL,
     status VARCHAR(100)       NOT NULL
 );
+CREATE TABLE user_information
+(
+    id              SERIAL PRIMARY KEY NOT NULL,
+    first_name      VARCHAR(50)        NOT NULL,
+    last_name       VARCHAR(50)        NOT NULL,
+    patronymic      VARCHAR(50),
+    phone           VARCHAR(50)        NOT NULL,
+    user_address_id BIGINT references user_address (id)
+);
 CREATE TABLE users
 (
     id           SERIAL PRIMARY KEY NOT NULL,
@@ -47,15 +56,7 @@ CREATE TABLE users
     active       BOOLEAN            NOT NULL
 
 );
-CREATE TABLE user_information
-(
-    id              SERIAL PRIMARY KEY NOT NULL,
-    first_name      VARCHAR(50)        NOT NULL,
-    last_name       VARCHAR(50)        NOT NULL,
-    patronymic      VARCHAR(50),
-    phone           VARCHAR(50)        NOT NULL,
-    user_address_id BIGINT references user_address (id)
-);
+
 
 CREATE TABLE product
 (
