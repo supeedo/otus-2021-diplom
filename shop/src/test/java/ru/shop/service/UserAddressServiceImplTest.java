@@ -71,15 +71,15 @@ class UserAddressServiceImplTest {
     @DisplayName("Deleting an address by id works as expected")
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void deleteAddressById() {
-        final var actualAddress = service.getAddressById(FIRST_TEST_ADDRESS.getId());
+        final var actualAddress = service.getAddressById(SECOND_TEST_ADDRESS.getId());
         assertThat(actualAddress)
                 .isNotNull()
-                .isEqualTo(FIRST_TEST_ADDRESS)
-                .isNotEqualTo(SECOND_TEST_ADDRESS)
+                .isEqualTo(SECOND_TEST_ADDRESS)
+                .isNotEqualTo(FIRST_TEST_ADDRESS)
                 .isNotEqualTo(BAD_TEST_ADDRESS);
-        service.deleteAddressById(FIRST_TEST_ADDRESS.getId());
+        service.deleteAddressById(SECOND_TEST_ADDRESS.getId());
         final var thrown = catchThrowable(() ->
-                service.getAddressById(FIRST_TEST_ADDRESS.getId())
+                service.getAddressById(SECOND_TEST_ADDRESS.getId())
         );
         assertThat(thrown)
                 .isInstanceOf(EntityNotFoundException.class)

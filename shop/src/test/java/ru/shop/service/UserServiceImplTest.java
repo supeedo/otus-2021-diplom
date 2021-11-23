@@ -63,7 +63,7 @@ class UserServiceImplTest {
     @DisplayName("Deleting an user by id works as expected")
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void deleteUserById() {
-        final var actualUser = service.getUserById(FIRST_TEST_USER.getId());
+        final var actualUser = service.getUserById(SECOND_TEST_USER.getId());
         assertThat(actualUser)
                 .isNotNull()
                 .isEqualTo(SECOND_TEST_USER)
