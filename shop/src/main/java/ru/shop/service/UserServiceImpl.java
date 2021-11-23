@@ -1,6 +1,5 @@
 package ru.shop.service;
 
-import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,8 +7,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.shop.domain.UserDTO;
-import ru.shop.domain.mapper.RoleMapper;
-import ru.shop.domain.mapper.UserInformationMapper;
 import ru.shop.domain.mapper.UserMapper;
 import ru.shop.repository.UserRepository;
 

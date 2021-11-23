@@ -2,8 +2,6 @@ package ru.shop.service;
 
 import ru.shop.domain.*;
 
-import java.util.List;
-
 public class TestData {
 
      static final UserAddressDTO FIRST_TEST_ADDRESS =

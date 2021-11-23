@@ -94,8 +94,6 @@ class ProductServiceImplTest {
         assertThat(thrown)
                 .isInstanceOf(EntityNotFoundException.class)
                 .isNotInstanceOf(NullPointerException.class);
-
-
     }
 
 
