@@ -51,7 +51,7 @@ public class TestData {
      static final UserDTO SECOND_TEST_USER =
             new UserDTO(2L, "test2@test-host.ru", "ytrewq", SECOND_TEST_USER_INFORMATION, FIRST_TEST_ROLE, true);
      static final UserDTO BAD_TEST_USER =
-            new UserDTO(3L, "bad-test@bad-test-host.ru", "badpassword", BAD_TEST_USER_INFORMATION, BAD_TEST_ROLE, false);
+            new UserDTO(3L, "bad-test@bad-test-host.ru", "badpassword", SECOND_TEST_USER_INFORMATION, SECOND_TEST_ROLE, false);
      static final UserDTO FIRST_TEST_USER_FOR_UPDATE =
             new UserDTO(1L, "update@update-host.ru", "update", FIRST_TEST_USER_INFORMATION_FOR_UPDATE, FIRST_TEST_ROLE_FOR_UPDATE, false);
 

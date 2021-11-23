@@ -15,7 +15,6 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
     @OneToOne(targetEntity = UserInformation.class, fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-//    @PrimaryKeyJoinColumn
     @JoinColumn(name = "user_info_id", referencedColumnName = "id")
     private UserInformation userInformation;
     @Column(name = "active", nullable = false)
