@@ -76,7 +76,7 @@ public class ProductOrder {
 
     @Override
     public String toString() {
-        return "ProductOrder{" +
+        return "ProductOrderMapper{" +
                 "id=" + id +
                 ", order=" + order +
                 ", product=" + product.getName() +

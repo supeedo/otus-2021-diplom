@@ -37,6 +37,13 @@ public class Order {
         this.status = status;
     }
 
+    public Order(Long id, User user, String note, StatusOrder status, List<ProductOrder> productOrders) {
+        this.id = id;
+        this.user = user;
+        this.note = note;
+        this.status = status;
+    }
+
     public Long getId() {
         return id;
     }
