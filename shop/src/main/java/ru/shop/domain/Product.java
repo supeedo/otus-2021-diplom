@@ -1,6 +1,11 @@
 package ru.shop.domain;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,6 +26,10 @@ public class Product {
     private Double price;
     @Column(name = "active", nullable = false)
     private boolean active;
+
+    @OneToMany( mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Fetch(FetchMode.SELECT)
+    private List<ProductOrder> productOrders = new ArrayList<>();
 
 
     public Product() {

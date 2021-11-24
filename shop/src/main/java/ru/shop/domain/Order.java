@@ -1,6 +1,11 @@
 package ru.shop.domain;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,6 +22,10 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "status_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_status_id"))
     private StatusOrder status;
+
+    @OneToMany( mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Fetch(FetchMode.SELECT)
+    private List<ProductOrder> productOrders = new ArrayList<>();
 
     public Order() {
     }
@@ -59,6 +68,15 @@ public class Order {
     public void setStatus(StatusOrder status) {
         this.status = status;
     }
+
+    public List<ProductOrder> getProductOrders() {
+        return productOrders;
+    }
+
+    public void setProductOrders(List<ProductOrder> productOrders) {
+        this.productOrders = productOrders;
+    }
+
 
     @Override
     public boolean equals(Object o) {
