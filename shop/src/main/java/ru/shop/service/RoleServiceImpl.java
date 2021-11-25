@@ -1,25 +1,23 @@
 package ru.shop.service;
 
-import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.shop.domain.RoleDTO;
-import ru.shop.domain.mapper.RoleMapper;
 import ru.shop.repository.RoleRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static ru.shop.domain.mapper.RoleMapper.roleMapper;
+
 @Service
 public class RoleServiceImpl implements RoleService {
     private static final Logger LOGGER = LoggerFactory.getLogger(RoleServiceImpl.class.getName());
 
     private final RoleRepository roleRepository;
-
-   private final RoleMapper roleMapper = Mappers.getMapper(RoleMapper.class);
 
     public RoleServiceImpl(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;

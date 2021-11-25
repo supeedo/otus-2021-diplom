@@ -5,10 +5,13 @@ import org.mapstruct.factory.Mappers;
 import ru.shop.domain.ProductOrder;
 import ru.shop.domain.ProductOrderDTO;
 
+import static ru.shop.domain.mapper.OrderMapper.orderMapper;
+import static ru.shop.domain.mapper.ProductMapper.productMapper;
+
 @Mapper
 public interface ProductOrderMapper {
-    OrderMapper orderMapper = Mappers.getMapper(OrderMapper.class);
-    ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
+
+    ProductOrderMapper productOrderMapper = Mappers.getMapper(ProductOrderMapper.class);
 
     default ProductOrderDTO productOrderToProductOrderDTO(ProductOrder entity) {
         return new ProductOrderDTO(

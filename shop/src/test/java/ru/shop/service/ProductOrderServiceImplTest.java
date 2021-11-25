@@ -21,7 +21,7 @@ class ProductOrderServiceImplTest {
     @Test
     @Transactional(readOnly = true)
     void getAll() {
-        List<ProductOrder> productOrders = service.getAll();
-        productOrders.forEach(System.out::println);
+//        List<ProductOrder> productOrders = service.getAll();
+//        productOrders.forEach(System.out::println);
     }
 }

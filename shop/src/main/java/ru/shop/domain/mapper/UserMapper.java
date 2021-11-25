@@ -7,6 +7,7 @@ import ru.shop.domain.UserDTO;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
+    UserMapper userMapper = Mappers.getMapper(UserMapper.class);
 
     UserDTO userToUserDto(User entity);
 

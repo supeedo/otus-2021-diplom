@@ -7,12 +7,13 @@ import ru.shop.domain.OrderDTO;
 
 import java.util.stream.Collectors;
 
+import static ru.shop.domain.mapper.ProductOrderMapper.productOrderMapper;
+import static ru.shop.domain.mapper.StatusOrderMapper.statusOrderMapper;
+import static ru.shop.domain.mapper.UserMapper.userMapper;
+
 @Mapper
 public interface OrderMapper {
-
-    UserMapper userMapper = Mappers.getMapper(UserMapper.class);
-    StatusOrderMapper statusOrderMapper = Mappers.getMapper(StatusOrderMapper.class);
-    ProductOrderMapper productOrderMapper = Mappers.getMapper(ProductOrderMapper.class);
+    OrderMapper orderMapper = Mappers.getMapper(OrderMapper.class);
 
     default OrderDTO orderToOrderDTO(Order entity) {
         return new OrderDTO(

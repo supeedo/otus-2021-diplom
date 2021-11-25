@@ -1,25 +1,23 @@
 package ru.shop.service;
 
-import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.shop.domain.UserAddressDTO;
-import ru.shop.domain.mapper.UserAddressMapper;
 import ru.shop.repository.AddressRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static ru.shop.domain.mapper.UserAddressMapper.userAddressMapper;
+
 @Service
 public class UserAddressServiceImpl implements UserAddressService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserAddressServiceImpl.class.getName());
 
     private final AddressRepository addressRepository;
-
-    private final UserAddressMapper userAddressMapper = Mappers.getMapper(UserAddressMapper.class);
 
     public UserAddressServiceImpl(AddressRepository addressRepository) {
         this.addressRepository = addressRepository;

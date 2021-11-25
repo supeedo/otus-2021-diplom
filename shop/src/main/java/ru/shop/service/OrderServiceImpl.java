@@ -1,21 +1,20 @@
 package ru.shop.service;
 
-import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.shop.domain.Order;
 import ru.shop.domain.OrderDTO;
-import ru.shop.domain.mapper.OrderMapper;
-import ru.shop.domain.mapper.ProductOrderMapper;
-import ru.shop.domain.mapper.StatusOrderMapper;
-import ru.shop.domain.mapper.UserMapper;
 import ru.shop.repository.OrderRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static ru.shop.domain.mapper.OrderMapper.orderMapper;
+import static ru.shop.domain.mapper.ProductOrderMapper.productOrderMapper;
+import static ru.shop.domain.mapper.StatusOrderMapper.statusOrderMapper;
+import static ru.shop.domain.mapper.UserMapper.userMapper;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -23,18 +22,8 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
 
-    private final OrderMapper orderMapper = Mappers.getMapper(OrderMapper.class);
-    private final UserMapper userMapper = Mappers.getMapper(UserMapper.class);
-    private final StatusOrderMapper statusOrderMapper = Mappers.getMapper(StatusOrderMapper.class);
-    private final ProductOrderMapper productOrderMapper = Mappers.getMapper(ProductOrderMapper.class);
-
     public OrderServiceImpl(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
-    }
-
-    @Transactional
-    public List<Order> getAll() {
-        return orderRepository.findAll();
     }
 
     @Transactional(readOnly = true)
@@ -89,7 +78,7 @@ public class OrderServiceImpl implements OrderService {
         order.setNote(orderDto.getNote());
         order.setStatus(statusOrderMapper.statusOrderDtoToStatusOrder(orderDto.getStatus()));
         order.setProductOrders(orderDto.getProductOrders().stream()
-                .map(productOrderMapper::productOrderDtoToProductOrder )
+                .map(productOrderMapper::productOrderDtoToProductOrder)
                 .collect(Collectors.toList()));
     }
 }

@@ -1,26 +1,23 @@
 package ru.shop.service;
 
-import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.shop.domain.RoleDTO;
 import ru.shop.domain.StatusOrderDTO;
-import ru.shop.domain.mapper.StatusOrderMapper;
 import ru.shop.repository.StatusOrderRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static ru.shop.domain.mapper.StatusOrderMapper.statusOrderMapper;
+
 @Service
 public class StatusOrderServiceImpl implements StatusOrderService {
     private static final Logger LOGGER = LoggerFactory.getLogger(StatusOrderServiceImpl.class.getName());
 
     private final StatusOrderRepository statusOrderRepository;
-
-   private final StatusOrderMapper statusOrderMapper = Mappers.getMapper(StatusOrderMapper.class);
 
     public StatusOrderServiceImpl(StatusOrderRepository statusOrderRepository) {
         this.statusOrderRepository = statusOrderRepository;

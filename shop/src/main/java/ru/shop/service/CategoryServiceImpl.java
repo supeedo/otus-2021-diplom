@@ -1,25 +1,23 @@
 package ru.shop.service;
 
-import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.shop.domain.Category;
 import ru.shop.domain.CategoryDTO;
-import ru.shop.domain.mapper.CategoryMapper;
 import ru.shop.repository.CategoryRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static ru.shop.domain.mapper.CategoryMapper.categoryMapper;
+
 @Service
 public class CategoryServiceImpl implements CategoryService {
     private static final Logger LOGGER = LoggerFactory.getLogger(CategoryServiceImpl.class.getName());
 
     private final CategoryRepository categoryRepository;
-    private final CategoryMapper categoryMapper = Mappers.getMapper(CategoryMapper.class);
 
     public CategoryServiceImpl(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;

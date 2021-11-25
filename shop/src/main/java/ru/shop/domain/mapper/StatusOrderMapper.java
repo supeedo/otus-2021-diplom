@@ -3,15 +3,14 @@ package ru.shop.domain.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-import ru.shop.domain.Role;
-import ru.shop.domain.RoleDTO;
+import org.mapstruct.factory.Mappers;
 import ru.shop.domain.StatusOrder;
 import ru.shop.domain.StatusOrderDTO;
 
 @Mapper(componentModel = "spring")
 public interface StatusOrderMapper {
 
-
+    StatusOrderMapper statusOrderMapper = Mappers.getMapper(StatusOrderMapper.class);
 
     @Mappings({
             @Mapping(target = "id", source = "entity.id"),

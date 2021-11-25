@@ -1,18 +1,18 @@
 package ru.shop.service;
 
-import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.shop.domain.UserInformationDTO;
-import ru.shop.domain.mapper.UserAddressMapper;
-import ru.shop.domain.mapper.UserInformationMapper;
 import ru.shop.repository.UserInformationRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static ru.shop.domain.mapper.UserAddressMapper.userAddressMapper;
+import static ru.shop.domain.mapper.UserInformationMapper.userInformationMapper;
 
 @Service
 public class UserInformationServiceImpl implements UserInformationService {
@@ -20,9 +20,6 @@ public class UserInformationServiceImpl implements UserInformationService {
 
     private final UserInformationRepository userInformationRepository;
     private final UserAddressService addressService;
-
-    private final UserInformationMapper userInformationMapper = Mappers.getMapper(UserInformationMapper.class);
-    private final UserAddressMapper userAddressMapper = Mappers.getMapper(UserAddressMapper.class);
 
     public UserInformationServiceImpl(UserInformationRepository userInformationRepository, UserAddressService addressService) {
         this.userInformationRepository = userInformationRepository;

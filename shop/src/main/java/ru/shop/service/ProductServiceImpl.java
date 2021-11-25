@@ -1,18 +1,18 @@
 package ru.shop.service;
 
-import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.shop.domain.ProductDTO;
-import ru.shop.domain.mapper.CategoryMapper;
-import ru.shop.domain.mapper.ProductMapper;
 import ru.shop.repository.ProductRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static ru.shop.domain.mapper.CategoryMapper.categoryMapper;
+import static ru.shop.domain.mapper.ProductMapper.productMapper;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -20,8 +20,6 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final CategoryService categoryService;
-    private final ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
-    private final CategoryMapper categoryMapper = Mappers.getMapper(CategoryMapper.class);
 
     public ProductServiceImpl(ProductRepository productRepository, CategoryService categoryService) {
         this.productRepository = productRepository;
