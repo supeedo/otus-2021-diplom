@@ -92,30 +92,36 @@ class OrderServiceImplTest {
                 .hasSizeLessThan(Math.toIntExact(BAD_COUNT_TEST_ORDER))
                 .containsOnly(FIRST_TEST_ORDER, SECOND_TEST_ORDER)
                 .doesNotContain(BAD_TEST_ORDER);
-//        orderService.createNewOrder(BAD_TEST_ORDER);
-//        final var actualOrdersAfterCreate = orderService.getAllOrder();
-//        assertThat(actualOrdersAfterCreate)
-//                .isNotNull()
-//                .isNotEmpty()
-//                .hasSizeGreaterThan(Math.toIntExact(COUNT_TEST_ORDER))
-//                .hasSize(Math.toIntExact(BAD_COUNT_TEST_ORDER))
-//                .containsOnly(FIRST_TEST_ORDER, SECOND_TEST_ORDER, BAD_TEST_ORDER);
+        orderService.createNewOrder(BAD_TEST_ORDER);
+        final var actualOrdersAfterCreate = orderService.getAllOrder();
+        assertThat(actualOrdersAfterCreate)
+                .isNotNull()
+                .isNotEmpty()
+                .hasSizeGreaterThan(Math.toIntExact(COUNT_TEST_ORDER))
+                .hasSize(Math.toIntExact(BAD_COUNT_TEST_ORDER))
+                .containsOnly(FIRST_TEST_ORDER, SECOND_TEST_ORDER, BAD_TEST_ORDER);
     }
 
     @Test
     @DisplayName("Update order as expected")
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void updateOrder() {
-//        final var actualRole = service.getRoleById(FIRST_TEST_ROLE.getId());
-//        assertThat(actualRole)
-//                .isNotNull()
-//                .hasFieldOrPropertyWithValue("id", FIRST_TEST_ROLE.getId())
-//                .hasFieldOrPropertyWithValue("roleName", FIRST_TEST_ROLE.getRoleName());
-//        service.updateRole(FIRST_TEST_ROLE_FOR_UPDATE);
-//        final var actualRoleAfterUpdate = service.getRoleById(FIRST_TEST_ROLE.getId());
-//        assertThat(actualRoleAfterUpdate)
-//                .isNotNull()
-//                .hasFieldOrPropertyWithValue("id", FIRST_TEST_ROLE_FOR_UPDATE.getId())
-//                .hasFieldOrPropertyWithValue("roleName", FIRST_TEST_ROLE_FOR_UPDATE.getRoleName());
+        final var actualOrder = orderService.getOrderById(FIRST_TEST_ORDER.getId());
+        assertThat(actualOrder)
+                .isNotNull()
+                .hasFieldOrPropertyWithValue("id", FIRST_TEST_ORDER.getId())
+                .hasFieldOrPropertyWithValue("user", FIRST_TEST_ORDER.getUser())
+                .hasFieldOrPropertyWithValue("note", FIRST_TEST_ORDER.getNote())
+                .hasFieldOrPropertyWithValue("status", FIRST_TEST_ORDER.getStatus())
+                .hasFieldOrProperty("ordersItems");
+        orderService.updateOrder(FIRST_TEST_ORDER_FOR_UPDATE);
+        final var actualOrderAfterUpdate = orderService.getOrderById(FIRST_TEST_ORDER.getId());
+        assertThat(actualOrderAfterUpdate)
+                .isNotNull()
+                .hasFieldOrPropertyWithValue("id", FIRST_TEST_ORDER_FOR_UPDATE.getId())
+                .hasFieldOrPropertyWithValue("user", FIRST_TEST_ORDER_FOR_UPDATE.getUser())
+                .hasFieldOrPropertyWithValue("note", FIRST_TEST_ORDER_FOR_UPDATE.getNote())
+                .hasFieldOrPropertyWithValue("status", FIRST_TEST_ORDER_FOR_UPDATE.getStatus())
+                .hasFieldOrProperty("ordersItems");
     }
 }

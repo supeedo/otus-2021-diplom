@@ -19,7 +19,7 @@ public class OrderDTO {
     private StatusOrderDTO status;
     @NotNull
     @Length(min = 1)
-    private List<OrderItemDTO> productOrders;
+    private List<OrderItemDTO> ordersItems;
 
     public OrderDTO() {
     }
@@ -29,7 +29,7 @@ public class OrderDTO {
         this.user = user;
         this.note = note;
         this.status = status;
-        this.productOrders = productOrders;
+        this.ordersItems = productOrders;
     }
 
     public Long getId() {
@@ -64,12 +64,12 @@ public class OrderDTO {
         this.status = status;
     }
 
-    public List<OrderItemDTO> getProductOrders() {
-        return productOrders;
+    public List<OrderItemDTO> getOrdersItems() {
+        return ordersItems;
     }
 
-    public void setProductOrders(List<OrderItemDTO> productOrders) {
-        this.productOrders = productOrders;
+    public void setOrdersItems(List<OrderItemDTO> ordersItems) {
+        this.ordersItems = ordersItems;
     }
 
     @Override

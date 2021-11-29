@@ -77,7 +77,7 @@ CREATE TABLE orders
 CREATE TABLE order_items
 (
     id            SERIAL PRIMARY KEY NOT NULL,
-    order_id      BIGINT             NOT NULL references orders (id),
+    order_id      BIGINT             references orders (id),
     product_id    BIGINT             NOT NULL references products (id),
     product_count BIGINT             NOT NULL
 );

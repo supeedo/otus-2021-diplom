@@ -7,8 +7,12 @@ import java.util.Objects;
 @Table(name = "order_items")
 public class OrderItem {
     @Id
+    @Column(name="id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(targetEntity = Order.class, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(targetEntity = Order.class, fetch = FetchType.LAZY
+            ,cascade = CascadeType.MERGE
+    )
     @JoinColumn(name = "order_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_order_id"))
     private Order order;
 
@@ -20,6 +24,12 @@ public class OrderItem {
     private Long count;
 
     public OrderItem() {
+    }
+
+    public OrderItem(Long id, Product product, Long count) {
+        this.id = id;
+        this.product = product;
+        this.count = count;
     }
 
     public OrderItem(Long id, Order order, Product product, Long count) {
@@ -76,7 +86,7 @@ public class OrderItem {
 
     @Override
     public String toString() {
-        return "ProductOrderMapper{" +
+        return "OrderItemMapper{" +
                 "id=" + id +
                 ", order=" + order +
                 ", product=" + product.getName() +

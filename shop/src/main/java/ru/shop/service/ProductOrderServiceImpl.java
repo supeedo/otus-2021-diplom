@@ -5,21 +5,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.shop.domain.OrderItemDTO;
-import ru.shop.repository.ProductOrderRepository;
+import ru.shop.repository.OrderItemRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ru.shop.domain.mapper.ProductOrderMapper.productOrderMapper;
+import static ru.shop.domain.mapper.OrderItemMapper.orderItemMapper;
 
 @Service
 public class ProductOrderServiceImpl  implements ProductOrderService{
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductOrderServiceImpl.class.getName());
 
-    private final ProductOrderRepository productOrderRepository;
+    private final OrderItemRepository productOrderRepository;
 
-    public ProductOrderServiceImpl(ProductOrderRepository productOrderRepository) {
+    public ProductOrderServiceImpl(OrderItemRepository productOrderRepository) {
         this.productOrderRepository = productOrderRepository;
     }
 
@@ -34,7 +34,7 @@ public class ProductOrderServiceImpl  implements ProductOrderService{
     public List<OrderItemDTO> getAllProductOrders() {
         final var productOrders = productOrderRepository.findAll();
         return productOrders.stream()
-                .map(productOrderMapper::productOrderToProductOrderDTO)
+                .map(orderItemMapper::orderItemToOrderItemDTO)
                 .collect(Collectors.toList());
     }
 
@@ -46,7 +46,7 @@ public class ProductOrderServiceImpl  implements ProductOrderService{
                 .findById(orderId)
                 .orElseThrow(() -> new EntityNotFoundException("Product order not found"));
         LOGGER.debug("Found product order by id = {}", productOrder);
-        return productOrderMapper.productOrderToProductOrderDTO(productOrder);
+        return orderItemMapper.orderItemToOrderItemDTO(productOrder);
     }
 
     @Transactional
@@ -60,7 +60,7 @@ public class ProductOrderServiceImpl  implements ProductOrderService{
     @Override
     public void createNewProductOrder(final OrderItemDTO productOrderDto) {
         LOGGER.debug("Create product order by dto = {}", productOrderDto);
-        final var productOrder = productOrderMapper.productOrderDtoToProductOrder(productOrderDto);
+        final var productOrder = orderItemMapper.orderItemDtoToOrderItem(productOrderDto);
         productOrderRepository.save(productOrder);
     }
 

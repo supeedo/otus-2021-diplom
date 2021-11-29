@@ -7,7 +7,7 @@ import ru.shop.domain.OrderDTO;
 
 import java.util.stream.Collectors;
 
-import static ru.shop.domain.mapper.ProductOrderMapper.productOrderMapper;
+import static ru.shop.domain.mapper.OrderItemMapper.orderItemMapper;
 import static ru.shop.domain.mapper.StatusOrderMapper.statusOrderMapper;
 import static ru.shop.domain.mapper.UserMapper.userMapper;
 
@@ -21,8 +21,8 @@ public interface OrderMapper {
                 userMapper.userToUserDto(entity.getUser()),
                 entity.getNote(),
                 statusOrderMapper.statusOrderToStatusOrderDto(entity.getStatus()),
-                entity.getProductOrders().stream()
-                        .map(productOrderMapper::productOrderToProductOrderDTO)
+                entity.getOrderItems().stream()
+                        .map(orderItemMapper::orderItemToOrderItemDTO)
                         .collect(Collectors.toList())
         );
     }
@@ -33,9 +33,18 @@ public interface OrderMapper {
                 userMapper.userDtoToUser(dto.getUser()),
                 dto.getNote(),
                 statusOrderMapper.statusOrderDtoToStatusOrder(dto.getStatus()),
-                dto.getProductOrders().stream()
-                        .map(productOrderMapper::productOrderDtoToProductOrder)
+                dto.getOrdersItems().stream()
+                        .map(orderItemMapper::orderItemDtoToOrderItem)
                         .collect(Collectors.toList())
+        );
+    }
+
+    default Order orderDtoToOrderForSave(OrderDTO dto) {
+        return new Order(
+                dto.getId(),
+                userMapper.userDtoToUser(dto.getUser()),
+                dto.getNote(),
+                statusOrderMapper.statusOrderDtoToStatusOrder(dto.getStatus())
         );
     }
 

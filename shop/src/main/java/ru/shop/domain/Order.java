@@ -14,7 +14,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_user_id"))
     private User user;
     @Column(name = "note")
@@ -23,9 +23,9 @@ public class Order {
     @JoinColumn(name = "status_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_status_id"))
     private StatusOrder status;
 
-    @OneToMany( mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany( mappedBy = "product", cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     @Fetch(FetchMode.SELECT)
-    private List<OrderItem> productOrders = new ArrayList<>();
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     public Order() {
     }
@@ -76,12 +76,12 @@ public class Order {
         this.status = status;
     }
 
-    public List<OrderItem> getProductOrders() {
-        return productOrders;
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
-    public void setProductOrders(List<OrderItem> productOrders) {
-        this.productOrders = productOrders;
+    public void setOrderItems(List<OrderItem> productOrders) {
+        this.orderItems = productOrders;
     }
 
 

@@ -9,20 +9,21 @@ import static ru.shop.domain.mapper.OrderMapper.orderMapper;
 import static ru.shop.domain.mapper.ProductMapper.productMapper;
 
 @Mapper
-public interface ProductOrderMapper {
+public interface OrderItemMapper {
 
-    ProductOrderMapper productOrderMapper = Mappers.getMapper(ProductOrderMapper.class);
+    OrderItemMapper orderItemMapper = Mappers.getMapper(OrderItemMapper.class);
 
-    default OrderItemDTO productOrderToProductOrderDTO(OrderItem entity) {
+    default OrderItemDTO orderItemToOrderItemDTO(OrderItem entity) {
         return new OrderItemDTO(
-
+                entity.getId(),
+               productMapper.productToProductDto(entity.getProduct()),
+                entity.getCount()
         );
     }
 
-    default OrderItem productOrderDtoToProductOrder(OrderItemDTO dto) {
+    default OrderItem orderItemDtoToOrderItem(OrderItemDTO dto) {
         return new OrderItem(
                 dto.getId(),
-                orderMapper.orderDtoToOrder(dto.getOrder()),
                 productMapper.productDtoToProduct(dto.getProduct()),
                 dto.getCount()
         );

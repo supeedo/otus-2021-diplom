@@ -14,6 +14,12 @@ public class OrderItemDTO {
     public OrderItemDTO() {
     }
 
+    public OrderItemDTO(Long id, ProductDTO product, Long count) {
+        this.id = id;
+        this.product = product;
+        this.count = count;
+    }
+
     public OrderItemDTO(Long id, OrderDTO order, ProductDTO product, Long count) {
         this.id = id;
         this.order = order;
