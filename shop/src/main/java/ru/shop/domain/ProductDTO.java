@@ -1,14 +1,25 @@
 package ru.shop.domain;
 
 
+import org.hibernate.validator.constraints.Length;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
+@Validated
 public class ProductDTO {
+    @NotNull
     private Long id;
     private CategoryDTO category;
+    @NotNull
+    @Length(max = 100)
     private String name;
+    @Length(max = 2048)
     private String description;
+    @NotNull
     private Double price;
+    @NotNull
     private boolean active;
 
     public ProductDTO() {

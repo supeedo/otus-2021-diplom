@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.shop.domain.ProductOrderDTO;
+import ru.shop.domain.OrderItemDTO;
 import ru.shop.repository.ProductOrderRepository;
 
 import javax.persistence.EntityNotFoundException;
@@ -31,7 +31,7 @@ public class ProductOrderServiceImpl  implements ProductOrderService{
 
     @Transactional(readOnly = true)
     @Override
-    public List<ProductOrderDTO> getAllProductOrders() {
+    public List<OrderItemDTO> getAllProductOrders() {
         final var productOrders = productOrderRepository.findAll();
         return productOrders.stream()
                 .map(productOrderMapper::productOrderToProductOrderDTO)
@@ -40,7 +40,7 @@ public class ProductOrderServiceImpl  implements ProductOrderService{
 
     @Transactional(readOnly = true)
     @Override
-    public ProductOrderDTO getProductOrderById(Long orderId) {
+    public OrderItemDTO getProductOrderById(final Long orderId) {
         LOGGER.debug("Find product order by id = {}", orderId);
         final var productOrder = productOrderRepository
                 .findById(orderId)
@@ -51,14 +51,14 @@ public class ProductOrderServiceImpl  implements ProductOrderService{
 
     @Transactional
     @Override
-    public void deleteProductOrderById(Long orderId) {
+    public void deleteProductOrderById(final Long orderId) {
         LOGGER.debug("Delete product order by id = {}", orderId);
         productOrderRepository.deleteById(orderId);
     }
 
     @Transactional
     @Override
-    public void createNewProductOrder(ProductOrderDTO productOrderDto) {
+    public void createNewProductOrder(final OrderItemDTO productOrderDto) {
         LOGGER.debug("Create product order by dto = {}", productOrderDto);
         final var productOrder = productOrderMapper.productOrderDtoToProductOrder(productOrderDto);
         productOrderRepository.save(productOrder);
@@ -66,7 +66,7 @@ public class ProductOrderServiceImpl  implements ProductOrderService{
 
     @Transactional
     @Override
-    public void updateProductOrder(ProductOrderDTO productOrderDto) {
+    public void updateProductOrder(final OrderItemDTO productOrderDto) {
         LOGGER.debug("Update product order by dto = {}", productOrderDto);
         final var productOrder = productOrderRepository
                 .findById(productOrderDto.getId())

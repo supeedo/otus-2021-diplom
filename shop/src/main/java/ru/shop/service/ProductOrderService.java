@@ -1,6 +1,6 @@
 package ru.shop.service;
 
-import ru.shop.domain.ProductOrderDTO;
+import ru.shop.domain.OrderItemDTO;
 
 import java.util.List;
 
@@ -8,13 +8,13 @@ public interface ProductOrderService {
 
     Long getCountProductOrders();
 
-    List<ProductOrderDTO> getAllProductOrders();
+    List<OrderItemDTO> getAllProductOrders();
 
-    ProductOrderDTO getProductOrderById(Long orderId);
+    OrderItemDTO getProductOrderById(Long orderId);
 
     void deleteProductOrderById(Long orderId);
 
-    void createNewProductOrder(ProductOrderDTO productOrderDto);
+    void createNewProductOrder(OrderItemDTO productOrderDto);
 
-    void updateProductOrder(ProductOrderDTO productOrderDto);
+    void updateProductOrder(OrderItemDTO productOrderDto);
 }

@@ -17,7 +17,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 @DisplayName("Role service tests")
 class RoleServiceImplTest {
 
-    private final RoleService service;
 
     private static final Long COUNT_TEST_ROLE = 2L;
     private static final Long BAD_COUNT_TEST_ROLE = 3L;
@@ -26,6 +25,8 @@ class RoleServiceImplTest {
     private static final RoleDTO BAD_TEST_ROLE = new RoleDTO(3L, "BAD_MAN");
     private static final RoleDTO FIRST_TEST_ROLE_FOR_UPDATE = new RoleDTO(1L, "UPDATE_USER");
 
+    private final RoleService service;
+
     RoleServiceImplTest(@Qualifier("roleServiceImpl") RoleService service) {
         this.service = service;
     }
@@ -33,7 +34,7 @@ class RoleServiceImplTest {
     @Test
     @DisplayName("Getting count roles as expected")
     void getCountRole() {
-        final Long actualCountRoles = service.getCountRole();
+        final var actualCountRoles = service.getCountRole();
         assertThat(actualCountRoles)
                 .isNotNull()
                 .isEqualTo(COUNT_TEST_ROLE)

@@ -1,7 +1,10 @@
 package ru.shop.domain;
 
+import org.springframework.validation.annotation.Validated;
+
 import java.util.Objects;
 
+@Validated
 public class UserDTO {
     private Long id;
     private String email;

@@ -25,7 +25,7 @@ public class Order {
 
     @OneToMany( mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(FetchMode.SELECT)
-    private List<ProductOrder> productOrders = new ArrayList<>();
+    private List<OrderItem> productOrders = new ArrayList<>();
 
     public Order() {
     }
@@ -37,7 +37,7 @@ public class Order {
         this.status = status;
     }
 
-    public Order(Long id, User user, String note, StatusOrder status, List<ProductOrder> productOrders) {
+    public Order(Long id, User user, String note, StatusOrder status, List<OrderItem> productOrders) {
         this.id = id;
         this.user = user;
         this.note = note;
@@ -76,11 +76,11 @@ public class Order {
         this.status = status;
     }
 
-    public List<ProductOrder> getProductOrders() {
+    public List<OrderItem> getProductOrders() {
         return productOrders;
     }
 
-    public void setProductOrders(List<ProductOrder> productOrders) {
+    public void setProductOrders(List<OrderItem> productOrders) {
         this.productOrders = productOrders;
     }
 

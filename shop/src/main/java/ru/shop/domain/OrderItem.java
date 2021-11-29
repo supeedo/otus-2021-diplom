@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "product_orders")
-public class ProductOrder {
+@Table(name = "order_items")
+public class OrderItem {
     @Id
     private Long id;
     @ManyToOne(targetEntity = Order.class, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
@@ -19,10 +19,10 @@ public class ProductOrder {
     @Column(name = "product_count")
     private Long count;
 
-    public ProductOrder() {
+    public OrderItem() {
     }
 
-    public ProductOrder(Long id, Order order, Product product, Long count) {
+    public OrderItem(Long id, Order order, Product product, Long count) {
         this.id = id;
         this.order = order;
         this.product = product;
@@ -65,7 +65,7 @@ public class ProductOrder {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductOrder that = (ProductOrder) o;
+        OrderItem that = (OrderItem) o;
         return Objects.equals(id, that.id) && Objects.equals(count, that.count);
     }
 

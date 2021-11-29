@@ -1,17 +1,20 @@
 package ru.shop.domain;
 
+import org.springframework.validation.annotation.Validated;
+
 import java.util.Objects;
 
-public class ProductOrderDTO {
+@Validated
+public class OrderItemDTO {
     private Long id;
     private OrderDTO order;
     private ProductDTO product;
     private Long count;
 
-    public ProductOrderDTO() {
+    public OrderItemDTO() {
     }
 
-    public ProductOrderDTO(Long id, OrderDTO order, ProductDTO product, Long count) {
+    public OrderItemDTO(Long id, OrderDTO order, ProductDTO product, Long count) {
         this.id = id;
         this.order = order;
         this.product = product;
@@ -54,7 +57,7 @@ public class ProductOrderDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductOrderDTO that = (ProductOrderDTO) o;
+        OrderItemDTO that = (OrderItemDTO) o;
         return Objects.equals(id, that.id) && Objects.equals(order, that.order) && Objects.equals(product, that.product) && Objects.equals(count, that.count);
     }
 
@@ -65,7 +68,7 @@ public class ProductOrderDTO {
 
     @Override
     public String toString() {
-        return "ProductOrderDTO{" +
+        return "OrderItemDTO{" +
                 "id=" + id +
                 ", order=" + order.getId() +
                 ", product=" + product.getName() +

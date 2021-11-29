@@ -2,6 +2,8 @@ package ru.shop.service;
 
 import ru.shop.domain.*;
 
+import java.util.List;
+
 public class TestData {
 
      static final UserAddressDTO FIRST_TEST_ADDRESS =
@@ -55,6 +57,23 @@ public class TestData {
      static final UserDTO FIRST_TEST_USER_FOR_UPDATE =
             new UserDTO(1L, "update@update-host.ru", "update", FIRST_TEST_USER_INFORMATION_FOR_UPDATE, FIRST_TEST_ROLE_FOR_UPDATE, false);
 
+     static final OrderDTO FIRST_TEST_ORDER =
+             new OrderDTO(1L, FIRST_TEST_USER,"some first test notes", FIRST_TEST_STATUS, List.of(new OrderItemDTO()));
+     static final OrderDTO SECOND_TEST_ORDER =
+             new OrderDTO(2L, FIRST_TEST_USER,"some second test notes", FIRST_TEST_STATUS, List.of(new OrderItemDTO()));
+     static final OrderDTO BAD_TEST_ORDER =
+             new OrderDTO(3L, FIRST_TEST_USER,"some first test notes", FIRST_TEST_STATUS, List.of(new OrderItemDTO()));
+     static final OrderDTO FIRST_TEST_ORDER_FOR_UPDATE =
+             new OrderDTO(1L, FIRST_TEST_USER_FOR_UPDATE,"some first test notes", FIRST_TEST_STATUS, List.of(new OrderItemDTO()));
+
+     static final OrderItemDTO FIRST_TEST_PRODUCT_ORDER =
+             new OrderItemDTO(1L, FIRST_TEST_ORDER, FIRST_TEST_PRODUCT, 5L);
+     static final OrderItemDTO SECOND_TEST_PRODUCT_ORDER =
+             new OrderItemDTO(2L, SECOND_TEST_ORDER, SECOND_TEST_PRODUCT, 10L);
+     static final OrderItemDTO BAD_TEST_PRODUCT_ORDER =
+             new OrderItemDTO(3L, BAD_TEST_ORDER, BAD_TEST_PRODUCT, 99L);
+     static final OrderItemDTO FIRST_TEST_PRODUCT_ORDER_FOR_UPDATE =
+             new OrderItemDTO(1L, FIRST_TEST_ORDER_FOR_UPDATE, FIRST_TEST_PRODUCT_FOR_UPDATE, 600L);
 
 
 }

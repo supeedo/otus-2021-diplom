@@ -1,19 +1,30 @@
 package ru.shop.domain;
 
+import org.hibernate.validator.constraints.Length;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
 
+@Validated
 public class OrderDTO {
+    @NotNull
     private Long id;
+    @NotNull
     private UserDTO user;
+    @Length(max = 2048)
     private String note;
+    @NotNull
     private StatusOrderDTO status;
-    private List<ProductOrderDTO> productOrders;
+    @NotNull
+    @Length(min = 1)
+    private List<OrderItemDTO> productOrders;
 
     public OrderDTO() {
     }
 
-    public OrderDTO(Long id, UserDTO user, String note, StatusOrderDTO status, List<ProductOrderDTO> productOrders) {
+    public OrderDTO(Long id, UserDTO user, String note, StatusOrderDTO status, List<OrderItemDTO> productOrders) {
         this.id = id;
         this.user = user;
         this.note = note;
@@ -53,11 +64,11 @@ public class OrderDTO {
         this.status = status;
     }
 
-    public List<ProductOrderDTO> getProductOrders() {
+    public List<OrderItemDTO> getProductOrders() {
         return productOrders;
     }
 
-    public void setProductOrders(List<ProductOrderDTO> productOrders) {
+    public void setProductOrders(List<OrderItemDTO> productOrders) {
         this.productOrders = productOrders;
     }
 

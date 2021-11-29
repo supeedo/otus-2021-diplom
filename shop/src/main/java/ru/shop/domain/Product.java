@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +29,7 @@ public class Product {
 
     @OneToMany( mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(FetchMode.SELECT)
-    private List<ProductOrder> productOrders = new ArrayList<>();
+    private List<OrderItem> productOrders = new ArrayList<>();
 
 
     public Product() {
