@@ -14,11 +14,6 @@ spring:
         format_sql: true
     show-sql: true
 
-  liquibase:
-    enabled: false
-    change-log: classpath:db.changelog/changelog-master.yml
-    contexts: dev
-
 springdoc:
   api-docs:
     path: "/v3/api-docs"
