@@ -30,7 +30,10 @@ springdoc:
     display-query-params-without-oauth2: true
     url: "/v3/api-docs"
   show-actuator: true
-
+management:
+  endpoint:
+    health:
+      show-details: when_authorized
 
 logging:
   level:
