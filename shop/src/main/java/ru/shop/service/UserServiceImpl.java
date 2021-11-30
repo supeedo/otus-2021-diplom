@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
         final String email = userDTO.getEmail();
         final var actualUser = userRepository.findUserByEmail(email);
         if (actualUser != null) {
-            return false;
+            throw new RuntimeException("User with this email is already registered");
         } else {
             final var createdUser = userMapper.userDtoToUser(userDTO);
             createdUser.setPassword(passwordEncoder.encode(userDTO.getPassword()));
@@ -85,13 +85,6 @@ public class UserServiceImpl implements UserService {
     public void deleteUserById(Long userId) {
         LOGGER.debug("Delete user by id = {}", userId);
         userRepository.deleteById(userId);
-    }
-
-    @Transactional
-    @Override
-    public void createNewUser(UserDTO userDto) {
-        final var user = userMapper.userDtoToUser(userDto);
-        userRepository.save(user);
     }
 
     @Transactional

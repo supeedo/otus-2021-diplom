@@ -15,8 +15,8 @@ public class TestData {
      static final UserAddressDTO FIRST_TEST_ADDRESS_FOR_UPDATE =
             new UserAddressDTO(1L, "Update city", "Update street", "Update house number", 987, "update number");
 
-     static final RoleDTO FIRST_TEST_ROLE = new RoleDTO(1L, "USER");
-     static final RoleDTO SECOND_TEST_ROLE = new RoleDTO(2L, "ADMIN");
+     static final RoleDTO FIRST_TEST_ROLE = new RoleDTO(1L, "ROLE_USER");
+     static final RoleDTO SECOND_TEST_ROLE = new RoleDTO(2L, "ROLE_ADMIN");
      static final RoleDTO BAD_TEST_ROLE = new RoleDTO(3L, "BAD_MAN");
      static final RoleDTO FIRST_TEST_ROLE_FOR_UPDATE = new RoleDTO(1L, "UPDATE_USER");
 
@@ -53,7 +53,7 @@ public class TestData {
      static final UserDTO SECOND_TEST_USER =
             new UserDTO(2L, "test2@test-host.ru", "ytrewq", SECOND_TEST_USER_INFORMATION, FIRST_TEST_ROLE, true);
      static final UserDTO BAD_TEST_USER =
-            new UserDTO(3L, "bad-test@bad-test-host.ru", "badpassword", SECOND_TEST_USER_INFORMATION, SECOND_TEST_ROLE, false);
+            new UserDTO(3L, "bad-test@bad-test-host.ru", "badpassword", SECOND_TEST_USER_INFORMATION, FIRST_TEST_ROLE, true);
      static final UserDTO FIRST_TEST_USER_FOR_UPDATE =
             new UserDTO(1L, "update@update-host.ru", "update", FIRST_TEST_USER_INFORMATION_FOR_UPDATE, FIRST_TEST_ROLE_FOR_UPDATE, false);
 

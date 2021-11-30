@@ -12,6 +12,7 @@ import javax.persistence.EntityNotFoundException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
+import static ru.shop.service.TestData.*;
 
 @SpringBootTest
 @DisplayName("Role service tests")
@@ -20,10 +21,6 @@ class RoleServiceImplTest {
 
     private static final Long COUNT_TEST_ROLE = 2L;
     private static final Long BAD_COUNT_TEST_ROLE = 3L;
-    private static final RoleDTO FIRST_TEST_ROLE = new RoleDTO(1L, "USER");
-    private static final RoleDTO SECOND_TEST_ROLE = new RoleDTO(2L, "ADMIN");
-    private static final RoleDTO BAD_TEST_ROLE = new RoleDTO(3L, "BAD_MAN");
-    private static final RoleDTO FIRST_TEST_ROLE_FOR_UPDATE = new RoleDTO(1L, "UPDATE_USER");
 
     private final RoleService service;
 

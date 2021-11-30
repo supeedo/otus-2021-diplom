@@ -90,7 +90,7 @@ class UserServiceImplTest {
                 .hasSizeLessThan(Math.toIntExact(BAD_COUNT_TEST_USER))
                 .containsOnly(FIRST_TEST_USER, SECOND_TEST_USER)
                 .doesNotContain(BAD_TEST_USER);
-        service.createNewUser(BAD_TEST_USER);
+        service.createUser(BAD_TEST_USER);
         final var actualUsersAfterCreate = service.getAllUser();
         assertThat(actualUsersAfterCreate)
                 .isNotNull()

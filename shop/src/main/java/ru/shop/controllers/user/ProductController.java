@@ -34,7 +34,7 @@ public class ProductController {
 
     @GetMapping("/")
     @Operation(summary = "Receipt of all products", tags = "product",
-            description = "Lets get a list of all categories")
+            description = "Lets get a list of all products")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Get all products information",
