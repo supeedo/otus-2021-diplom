@@ -6,4 +6,6 @@ import ru.shop.domain.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+
+    User findUserByEmail(String email);
 }

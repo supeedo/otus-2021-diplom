@@ -50,7 +50,7 @@ CREATE TABLE users
 (
     id           SERIAL PRIMARY KEY NOT NULL,
     email        VARCHAR(50)        NOT NULL UNIQUE,
-    password     VARCHAR(50)        NOT NULL,
+    password     VARCHAR(1000)        NOT NULL,
     user_info_id BIGINT,
     role_id      BIGINT references roles (id),
     active       BOOLEAN            NOT NULL

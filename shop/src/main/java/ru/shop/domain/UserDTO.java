@@ -1,15 +1,24 @@
 package ru.shop.domain;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
 @Validated
 public class UserDTO {
+    @NotNull
     private Long id;
+    @NotNull
+    @Pattern(regexp = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$", flags = Pattern.Flag.CASE_INSENSITIVE)
     private String email;
+    @NotNull
+    @Length(min = 8, max = 1000)
     private String password;
     private UserInformationDTO userInformation;
+    @NotNull
     private boolean active;
     private RoleDTO role;
 

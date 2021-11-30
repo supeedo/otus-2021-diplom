@@ -11,7 +11,7 @@ public class CategoryDTO {
     @NotNull
     private Long id;
     @NotNull
-    @Length(min = 3, max = 50 )
+    @Length(min = 3, max = 50)
     private String categoryName;
     @Length(max = 255)
     private String description;

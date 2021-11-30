@@ -5,6 +5,9 @@ import ru.shop.domain.UserDTO;
 import java.util.List;
 
 public interface UserService {
+
+    boolean createUser(UserDTO userDTO);
+
     Long getCountUser();
 
     List<UserDTO> getAllUser();

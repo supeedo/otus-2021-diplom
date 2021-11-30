@@ -40,6 +40,17 @@ public class RoleServiceImpl implements RoleService {
 
     @Transactional(readOnly = true)
     @Override
+    public RoleDTO getRoleByRoleName(String name) {
+        LOGGER.debug("Find role by name = {}", name);
+        final var role = roleRepository
+                .findRoleByRoleName(name)
+                .orElseThrow(() -> new EntityNotFoundException("Role not found"));
+        LOGGER.debug("Found role by id = {}", role);
+        return roleMapper.roleToRoleDto(role);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
     public RoleDTO getRoleById(Long roleId) {
         LOGGER.debug("Find role by id = {}", roleId);
         final var role = roleRepository

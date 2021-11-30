@@ -1,4 +1,4 @@
-package ru.shop.controllers;
+package ru.shop.controllers.user;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
