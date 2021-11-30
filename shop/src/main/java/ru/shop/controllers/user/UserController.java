@@ -9,7 +9,7 @@ import ru.shop.service.UserService;
 @RestController
 @RequestMapping("/user")
 @RestControllerAdvice
-@Tag(name = "Пользователи", description = "методы контроллера Пользователей")
+@Tag(name = "Users", description = "User controllers methods")
 public class UserController {
 
     private final UserService userService;

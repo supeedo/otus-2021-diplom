@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.shop.domain.CategoryDTO;
 import ru.shop.service.CategoryService;
@@ -21,7 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/category")
 @RestControllerAdvice
-@Tag(name = "Категории", description = "методы контроллера Категорий товара")
+@Tag(name = "Categories", description = "Product Category controller methods")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -31,7 +32,8 @@ public class CategoryController {
     }
 
     @GetMapping("/")
-    @Operation(summary = "Получение всех категорий", tags = "category", description = "Позволяет получить список всех категорий")
+    @Operation(summary = "Retrieving all categories", tags = "category",
+            description = "Lets get a list of all categories")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Get all categories information",
@@ -48,7 +50,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Получение категории по id", tags = "category")
+    @Operation(summary = "Getting a category by id", tags = "category")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Get  category information",
@@ -64,8 +66,9 @@ public class CategoryController {
         return categoryService.getCategoryById(id);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/")
-    @Operation(summary = "Добавление новой категории", tags = "category")
+    @Operation(summary = "Adding a new category", tags = "category")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201",
                     description = "Add new category",
@@ -77,17 +80,18 @@ public class CategoryController {
                     description = "Server error",
                     content = @Content)
     })
-    public ResponseEntity<CategoryDTO> addCategory(@RequestBody @Valid CategoryDTO categoryDTO){
-        if(categoryDTO != null){
+    public ResponseEntity<CategoryDTO> addCategory(@RequestBody @Valid CategoryDTO categoryDTO) {
+        if (categoryDTO != null) {
             categoryService.createNewCategory(categoryDTO);
             return new ResponseEntity<>(categoryDTO, HttpStatus.CREATED);
-        }else{
+        } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
     @PostMapping("/{id}")
-    @Operation(summary = "Обновление категории", tags = "category")
+    @Operation(summary = "Category update", tags = "category")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Category updated successfully",
@@ -99,24 +103,26 @@ public class CategoryController {
                     description = "Server error",
                     content = @Content)
     })
-    public String updateCategoryById(@PathVariable("id") String id, @RequestBody CategoryDTO categoryDTO){
+    public String updateCategoryById(@PathVariable("id") String id, @RequestBody CategoryDTO categoryDTO) {
         return null;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
-    @Operation(summary = "Удаление категории", tags = "category")
+    @Operation(summary = "Removal of category", tags = "category")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Category delete successfully",
                     content = @Content),
             @ApiResponse(responseCode = "404",
-                    description = "Category not updated",
+                    description = "Category not deleted",
                     content = @Content),
             @ApiResponse(responseCode = "500",
                     description = "Server error",
                     content = @Content)
     })
-    public void deleteCategoryById(@PathVariable String id){
-//        return null;
+    public ResponseEntity<HttpStatus> deleteCategoryById(@PathVariable Long id) {
+        categoryService.deleteCategoryById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

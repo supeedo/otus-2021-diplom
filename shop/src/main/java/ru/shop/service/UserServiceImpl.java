@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
             final var createdUser = userMapper.userDtoToUser(userDTO);
             createdUser.setPassword(passwordEncoder.encode(userDTO.getPassword()));
             createdUser.setActive(true);
-            createdUser.setRole(roleMapper.roleDtoToRole(roleService.getRoleByRoleName("USER")));
+            createdUser.setRole(roleMapper.roleDtoToRole(roleService.getRoleByRoleName("ROLE_USER")));
             userRepository.save(createdUser);
             LOGGER.info("Saving new User with email: {}", email);
             return true;

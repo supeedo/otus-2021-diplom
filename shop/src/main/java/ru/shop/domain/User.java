@@ -16,10 +16,10 @@ public class User implements UserDetails {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "email", length = 1000, nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password",length = 1000, nullable = false)
     private String password;
 
     @OneToOne(targetEntity = UserInformation.class, fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)

@@ -28,15 +28,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/product/**", "/user/registration").permitAll()
+                .antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/", "/product/**", "/user/**").permitAll()
+//                .antMatchers("/", "/product/**", "/user/registration").permitAll()
                 .anyRequest().authenticated()
                 .and()
-//                .formLogin()
-//                .loginPage("/login")
-//                .permitAll()
-//                .and()
-                .logout()
-                .permitAll();
+                .formLogin()
+                .and()
+                .rememberMe()
+                .key("someKey").tokenValiditySeconds(60 * 60 * 24 * 90);
     }
 
     @Bean

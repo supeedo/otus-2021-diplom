@@ -5,9 +5,9 @@ insert into category (id, category, description)
 values (default, 'desktop', 'description for desktop category');
 
 insert into roles (id, role)
-values (default, 'USER');
+values (default, 'ROLE_USER');
 insert into roles (id, role)
-values (default, 'ADMIN');
+values (default, 'ROLE_ADMIN');
 
 insert into status_orders (id, status)
 values (default, 'REGISTRATION');

@@ -14,19 +14,18 @@ spring:
         format_sql: true
     show-sql: true
 
-
- freemarker:
-   expose-request-attributes: true
-
-
-
-
-
-
-
 springdoc:
   api-docs:
-    path: "/api-docs"
+    path: "/v3/api-docs"
+  swagger-ui:
+    disable-swagger-default-url: true
+    groups-order: DESC
+    operationsSorter: method
+    use-root-path: true
+    display-query-params-without-oauth2: true
+    url: "/v3/api-docs"
+  show-actuator: true
+
 
 logging:
   level:
@@ -36,3 +35,5 @@ logging:
   file:
     max-history: 7
     max-size: 10MB
+
+
